@@ -9,8 +9,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Trading Management Systems">
-    <meta name="author" content="BetangFX">
+    <meta name="description" content="e-Pidum">
+    <meta name="author" content="BetangIT">
     <link rel="icon" href="<?php echo $site_url;?>/assets/img/Icon.png" type="image/icon type">
     <title><?php echo $appname . ' '. $vendors;?></title>
 

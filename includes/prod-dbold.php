@@ -3,7 +3,7 @@
 	$db['host'] = "localhost"; 
 	$db['user'] = "root"; 
 	$db['pass'] = ""; 
-	$db['name'] = "tms";
+	$db['name'] = "epidum";
 	
 	$koneksi = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name']);
 	if (mysqli_connect_errno()) {

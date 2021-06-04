@@ -9,7 +9,7 @@
 		var $host = 'localhost';
 		var $Username = 'root';
 		var $password = '';
-		var $database = 'tms';
+		var $database = 'epidum';
 		var $koneksi = '';
 		function __construct(){
 			$this->koneksi = mysqli_connect($this->host, $this->Username, $this->password,$this->database);

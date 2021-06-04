@@ -1,8 +1,8 @@
 <?php
-	/* Trading Management System
+	/* ePidum
 		*
-		* Developed by betangfx.com
-		* Copyright (c) 2021, BetangFX 
+		* Developed by betangit.com
+		* Copyright (c) 2021, BetangIT 
 		*
 		* Author: Karisma Putra Purwanto, S.Kom
 	*/
@@ -12,14 +12,14 @@
 	date_default_timezone_set('Asia/Jakarta');
 	/*---------------- Site Config ----------------*/
 	if ($site_mode == 'live') {
-		$site_url			= "https://app.betangfx.com";	
+		$site_url			= "https://epidum.kejari-palangkaraya.go.id";	
 	} else if ($site_mode == 'prod') {
-		$site_url			= "http://apploc.betangfx.com";
+		$site_url			= "http://epidum.betangit.com";
 	} else {
-		echo 'Web Sedang Dalam Tahap Perbaikan';
+		echo 'Aplikasi Sedang Dalam Tahap Perbaikan';
 	}
-	$vendors			= "BetangFX";
-	$appname			= "Trading Management";
+	$vendors			= "BetangIT";
+	$appname			= "e-Pidum";
 	$version			= "0.1";
 	
 	/*---------------- Folder Config ----------------*/
