@@ -30,7 +30,7 @@
 			$NoTelp 		= $row['NoTelp'];
 			$UserLevelID 	= $row['UserLevelID'];
 			$StatusID 		= $row['StatusID'];
-			$Status		= $row['Status'];
+			$Status			= $row['Status'];
 			$UserBuat 		= $row['UserBuat'];
 			$TglBuat 		= $row['TglBuat'];
 			$UserEdit 		= $row['UserEdit'];
@@ -115,7 +115,7 @@
 			<div class="form-group row">
 				<label class="col-form-label col-sm-4 text-sm-left">Level</label>
 				<div class="col-sm-8">
-					<select class="form-control id="UserLevelID" name="UserLevelID" required>
+					<select class="form-control" id="UserLevelID" name="UserLevelID" required>
 						<option value=""></option>
 						<?php
 							$level = new level_data();
