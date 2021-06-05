@@ -18,7 +18,7 @@
 	} else {
 		echo 'Aplikasi Sedang Dalam Tahap Perbaikan';
 	}
-	$vendors			= "BetangIT";
+	$vendors			= "Kejaksaan Negeri Palangka Raya";
 	$appname			= "e-Pidum";
 	$version			= "0.1";
 	
@@ -35,11 +35,9 @@
 	if ($site_mode == 'live') {
 		define('db', dirname(__FILE__));
 		include $inc_folder . 'live-db.php';
-		include $inc_folder . 'live-dbold.php';
 	} else if ($site_mode == 'prod') {
 		define('db', dirname(__FILE__));
 		include $inc_folder . 'prod-db.php';
-		include $inc_folder . 'prod-dbold.php';
 	}
 	include $inc_folder . 'function.php';
 	foreach(glob($class_module) as $file) 

@@ -5,36 +5,28 @@
 	$submodul	= isset($_POST['submodul']) ? $_POST['submodul']: NULL;
 	$UserID		= isset($_POST['UserID']) 	?$_POST['UserID'] 	: NULL;
 	
-	if ($modul == 'tambah_akun' && $submodul == 'infoakun') {
-		$AkunID 	= isset($_POST['AkunID']) 		? $_POST['AkunID'] 		: NULL;
-		$BrokerID 	= $_POST['Broker'];
-		$NoAkun 	= $_POST['NoAkun'];
-		$Leverage 	= $_POST['Leverage'];
+	if ($modul == 'tambah_master' && $submodul == 'jabatan') {
+		$JabatanID 	= isset($_POST['JabatanID']) 		? $_POST['JabatanID'] 		: NULL;
+		$Jabatan 	= isset($_POST['Jabatan']) 			? $_POST['Jabatan'] 		: NULL;
 		
-		$info 	= new settingAkun();
-		$result = $info->infoAkun('create', $AkunID, $BrokerID, $NoAkun, $Leverage, $UserID);
+		$jabatan 	= new master();
+		$result = $jabatan->jabatan('create', $JabatanID, $Jabatan, $UserID);
 		echo $result;
 	}
 	
-	if ($modul == 'ubah_akun' && $submodul == 'infoakun') {
-		$AkunID 	= $_POST['ID'];
-		$BrokerID 	= $_POST['Broker'];
-		$NoAkun 	= $_POST['NoAkun'];
-		$Leverage 	= $_POST['Leverage'];
+	if ($modul == 'ubah_master' && $submodul == 'jabatan') {
+		$JabatanID 	= isset($_POST['JabatanID']) 		? $_POST['JabatanID'] 		: NULL;
+		$Jabatan 	= isset($_POST['Jabatan']) 			? $_POST['Jabatan'] 		: NULL;
 		
-		$info 	= new settingAkun();
-		$result = $info->infoAkun('update', $AkunID, $BrokerID, $NoAkun, $Leverage, $UserID);
+		$jabatan 	= new master();
+		$result = $jabatan->jabatan('update', $JabatanID, $Jabatan, $UserID);
 		echo $result;
 	}
 	
-	if ($modul == 'hapus_akun' && $submodul == 'infoakun') {
-		$AkunID 	= $_POST['ID'];
-		$BrokerID 	= isset($_POST['Broker']) 		? $_POST['AkunID'] 		: NULL;
-		$NoAkun 	= isset($_POST['NoAkun']) 		? $_POST['AkunID'] 		: NULL;
-		$Leverage 	= isset($_POST['Leverage']) 		? $_POST['AkunID'] 		: NULL;
-		
-		$info 	= new settingAkun();
-		$result = $info->infoAkun('delete', $AkunID, $BrokerID, $NoAkun, $Leverage, $UserID);
+	if ($modul == 'hapus_master' && $submodul == 'jabatan') {
+		$JabatanID 	= $_POST['ID'];		
+		$jabatan 	= new master();
+		$result = $jabatan->jabatan('delete', $JabatanID, '', $UserID);
 		echo $result;
 	}
 
