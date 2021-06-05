@@ -89,7 +89,7 @@ $(document).ready(function() {
         responsive: true
     });
 
-    $("#list-user").DataTable({
+    $("#list_user").DataTable({
         responsive: true
     });
 });

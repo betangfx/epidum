@@ -17,7 +17,7 @@
                 <h1 class=" card-title">Daftar User</h1>
             </div>
             <div class="card-body">
-                <table id="list-user" class="table table-striped" style="width:100%">
+                <table id="list_user" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
                             <th class="text-center align-middle">No</th>
