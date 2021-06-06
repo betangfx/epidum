@@ -1,22 +1,53 @@
 <?php
 	class master {
 		
-		function ringkasanAkun($UserID) 
+		function jaksa($action, $NIP, $JabatanID,$UserID) 
 		{
 			$this->db = new database();
 			$conn = $this->db->koneksi;
-			$query = "SELECT a.AkunID, a.UserID,
-			COALESCE(SUM(CASE WHEN a.TransaksiID = '1' then a.Nominal end), 0) as TotalTambahDana,
-			COALESCE(SUM(CASE WHEN a.TransaksiID = '2' then a.Nominal end), 0) as TotalTarikDana,
-			b.SaldoAkhir
-			FROM user_akun_transaksi a
-			LEFT JOIN user_akun_saldo b ON a.UserID = b.UserID
-			WHERE a.UserID ='$UserID'"; 
-			$data = mysqli_query($conn,$query);
-			while($row = mysqli_fetch_array($data)){
-				$hasil[] = $row;
+			if ($action == 'create') {
+				$sql = "INSERT INTO master_jabatan (Jabatan, TglBuat, UserBuat) VALUES ('$Jabatan', NOW(), '$UserID')";
+				$query = mysqli_query($conn, $sql);
+				if($query){
+					$hasil = 'sukses';
+					} else {
+					$hasil = 'gagal_tambah_data';
+				}
+				return $hasil;
+			} 
+			else if  ($action == 'read') {
+				$hasil = array();
+				if (!empty($NIP)) {
+					$sql = "SELECT a.* FROM master_jaksa a WHERE a.JabatanID=$JabatanID";
+				} else {
+					$sql = "SELECT a.* FROM master_jaksa a";
+				}
+				$query = mysqli_query($conn,$sql);
+				while($result = mysqli_fetch_array($query)){
+					$hasil[] = $result;
+				}
+				return $hasil;
+			} 
+			else if  ($action == 'update') {
+				$sql = "UPDATE master_jabatan SET Jabatan = '$Jabatan', TglEdit = NOW(), UserEdit = '$UserID' WHERE JabatanID='$JabatanID'"; 
+				$query = mysqli_query($conn,$sql);
+				if($query){
+					$hasil = 'sukses';
+					} else {
+					$hasil = 'gagal_tambah_data';
+				}
+				return $hasil;
+			} 
+			else if  ($action == 'delete') {
+				$sql = "DELETE FROM master_jabatan WHERE JabatanID='$JabatanID'"; 
+				$query = mysqli_query($conn,$sql);
+				if($query){
+					$hasil = 'sukses';
+					} else {
+					$hasil = 'gagal_tambah_data';
+				}
+				return $hasil;
 			}
-			return $hasil;
 		}
 		
 		function jabatan($action, $JabatanID, $Jabatan, $UserID)

@@ -20,13 +20,7 @@
     <style>
     body {
         opacity: 0;
-    }
-
-    #mytable.table-sm td,
-    #mytable.table-sm th {
-        padding: 0rem;
-    }
-    }
+    }  
     </style>
 </head>
 
@@ -371,6 +365,7 @@
     <script src="<?php echo $site_url;?>/assets/js/datatable.data.js"></script>
     <script src="<?php echo $site_url;?>/assets/js/form.js"></script>
     <script src="<?php echo $site_url;?>/assets/js/summernote.js"></script>
+    <script src="<?php echo $site_url;?>/assets/js/tab.data.js"></script>
     <script>
     $(function() {
         $("#smartwizard-arrows-success").smartWizard({

@@ -67,7 +67,7 @@
 			$this->db = new database();
 			$conn = $this->db->koneksi;
 			$hasil = array();
-			$sql = "SELECT * FROM app_modul WHERE GroupModul = $GroupMenuID AND ModulID IN ($UserMenuIDList)";
+			$sql = "SELECT * FROM app_modul WHERE GroupModulID = $GroupMenuID AND ModulID IN ($UserMenuIDList)";
 			$query = mysqli_query($conn, $sql);
 			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{

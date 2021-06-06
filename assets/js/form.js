@@ -8,6 +8,7 @@ $(document).ready(function() {
         var page = $(e.relatedTarget).data('page');
         var id = $(e.relatedTarget).data('id');
         var UserID = $(e.relatedTarget).data('UserID');
+        var UserLevel = $(e.relatedTarget).data('UserLevel');
         if (action == 'tambah') {
             $('#globalModal .modal-dialog').addClass('modal-dialog').addClass('modal-' + size);
             $('#globalModal .modal-title').text('Form ' + header);
@@ -16,7 +17,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../page/' + folder + '/' + page + '.form.php',
-                data: { 'ID': id, 'UserID': UserID, 'modul': modul, 'sub': sub },
+                data: { 'ID': id, 'UserID': UserID, 'UserLevel': UserLevel, 'modul': modul, 'sub': sub },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#globalModal .modal-body-data').html(divs[0]);
@@ -32,7 +33,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../page/' + folder + '/' + page + '.form.php',
-                data: { 'ID': id, 'UserID': UserID, 'modul': modul, 'sub': sub },
+                data: { 'ID': id, 'UserID': UserID, 'UserLevel': UserLevel, 'modul': modul, 'sub': sub },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#globalModal .modal-body-data').html(divs[0]);
@@ -48,7 +49,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../page/' + folder + '/' + page + '.form.php',
-                data: { 'ID': id, 'UserID': UserID, 'modul': modul, 'sub': sub },
+                data: { 'ID': id, 'UserID': UserID, 'UserLevel': UserLevel, 'modul': modul, 'sub': sub },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#globalModal .modal-body-data').html(divs[0]);
@@ -64,7 +65,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../page/' + folder + '/' + page + '.form.php',
-                data: { 'ID': id, 'UserID': UserID, 'modul': modul, 'sub': sub },
+                data: { 'ID': id, 'UserID': UserID, 'UserLevel': UserLevel, 'modul': modul, 'sub': sub },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#globalModal .modal-body-data').html(divs[0]);
@@ -87,6 +88,7 @@ $(document).ready(function() {
         var page = $(e.relatedTarget).data('form');
         var id = $(e.relatedTarget).data('id');
         var UserID = $(e.relatedTarget).data('userid');
+        var UserLevel = $(e.relatedTarget).data('userlevel');
         if (action == 'tambah') {
             $('#newModal .modal-dialog').addClass('modal-dialog').addClass('modal-' + size);
             $('#newModal .modal-title').text('Form ' + header + ' ' + sub_header);
@@ -95,7 +97,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../modules/' + folder + '/' + module + '/' + page + '.form.php',
-                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID },
+                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID, 'UserLevel': UserLevel },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#newModal .modal-body-data').html(divs[0]);
@@ -111,7 +113,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../modules/' + folder + '/' + module + '/' + page + '.form.php',
-                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID },
+                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID, 'UserLevel': UserLevel },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#newModal .modal-body-data').html(divs[0]);
@@ -127,7 +129,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../modules/' + folder + '/' + module + '/' + page + '.form.php',
-                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID },
+                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID, 'UserLevel': UserLevel },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#newModal .modal-body-data').html(divs[0]);
@@ -143,7 +145,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../modules/' + folder + '/' + module + '/' + page + '.form.php',
-                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID },
+                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID, 'UserLevel': UserLevel },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#newModal .modal-body-data').html(divs[0]);

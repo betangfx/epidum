@@ -6,7 +6,7 @@
 	$submodul	= isset($_POST['submodul']) ? $_POST['submodul']: NULL;
 	$UserID		= isset($_POST['UserID']) 	? $_POST['UserID'] 	: NULL;
 	
-	if ($modul == 'tambah_user' && $submodul == 'login') {
+	if ($modul == 'tambah_user') {
 		$NamaLengkap 	= '';
 		$Username 		= '';
 		$Password		= '';
@@ -20,17 +20,7 @@
 		$TglEdit 		= '';
 		
 	}
-	if ($modul == 'tambah_user' && $submodul == 'level') {
-		$UserLevel		= '';
-		$StatusID 		= '';	
-	}
-
-	if ($modul == 'tambah_user' && $submodul == 'akses') {
-		$UserLevelID		= '';
-		$DModulID		= array();
-	}
-
-	if ($modul == 'ubah_user' && $submodul == 'login') {
+	if ($modul == 'ubah_user' || $modul == 'lihat_user') {
 		$user = new user_data();
 		foreach ($user->user($id) as $row) {
 			$NamaLengkap 	= $row['Nama'];
@@ -41,20 +31,10 @@
 			$UserLevelID 	= $row['UserLevelID'];
 			$StatusID 		= $row['StatusID'];
 			$Status			= $row['Status'];
-		}
-	}
-	if ($modul == 'ubah_user' && $submodul == 'level') {
-		$level = new level_data();
-		foreach ($level->level($id) as $row) {
-			$UserLevel 		= $row['UserLevel'];
-			$StatusID 		= $row['StatusID'];
-		}
-	}
-	if ($modul == 'ubah_user' && $submodul == 'akses') {
-		$user = new hakakses_data();
-		foreach($user->hakakses($id) as $row){ 
-			$UserLevelID    =	$row['UserLevelID'];
-			$DModulID		=	explode(',',$row['ModulID']);
+			$UserBuat 		= $row['UserBuat'];
+			$TglBuat 		= $row['TglBuat'];
+			$UserEdit 		= $row['UserEdit'];
+			$TglEdit 		= $row['TglEdit'];
 		}
 	}
 	?>
@@ -80,7 +60,7 @@
 		</div>
 	</div>
 	<?php
-	if ($modul == 'tambah_user' && $submodul == 'login' || $modul == 'ubah_user' && $submodul == 'login') {
+	if ($modul == 'tambah_user' || $modul == 'ubah_user') {
 	?>
 	<div class="row">
 		<div class="col-md-12"> <!-- UserID -->
@@ -139,7 +119,7 @@
 						<option value=""></option>
 						<?php
 							$level = new level_data();
-							foreach ($level->level('') as $row) {
+							foreach ($level->level() as $row) {
 							?>
 							<option value="<?php echo $row['UserLevelID'];?>" <?php if ($UserLevelID == $row['UserLevelID']) { echo "selected='selected'";} ?>><?php echo $row['UserLevel'];?></option>
 							<?php
@@ -171,112 +151,10 @@
 			</div>
 		</div>
 	</div>
+	
 	<?php
 	}
-	if ($modul == 'tambah_user' && $submodul == 'level' || $modul == 'ubah_user' && $submodul == 'level') {
-	?>
-	<div class="row">
-		<div class="col-md-12"> <!-- UserLevelID -->
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4 text-sm-left">ID</label>
-				<div class="col-sm-8">
-					<input type="text" class="form-control text-center" id="UserLevelID" name="UserLevelID" value="<?php echo $id;?>" required>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12"> <!-- Nama-->
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4 text-sm-left">Level </label>
-				<div class="col-sm-8">
-					<input type="text" class="form-control text-center" id="UserLevel" name="UserLevel" value="<?php echo $UserLevel;?>" required>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12"> <!-- Status -->
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4 text-sm-left">Status</label>
-				<div class="col-sm-8">
-					<label class="col-md-12 form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="StatusID" name="StatusID" value="11"
-							<?php if ($StatusID == '11') { echo 'checked="checked"';}?>>
-						<span class="form-check-label">
-							Aktif
-						</span>
-					</label>
-					<label class="col-md-12 form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="StatusID" name="StatusID" value="12"
-							<?php if ($StatusID == '12') { echo 'checked="checked"';}?>>
-						<span class="form-check-label">
-							Tidak Aktif
-						</span>
-					</label>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php
-	}
-	if ($modul == 'tambah_user' && $submodul == 'akses' || $modul == 'ubah_user' && $submodul == 'akses') {
-	?>
-		<div class="row">
-			<div class="col-md-12"> <!-- User Level -->
-				<div class="form-group row">
-					<label class="col-form-label col-sm-4 text-sm-left">Level</label>
-					<div class="col-sm-8">
-						<select class="form-control" id="UserLevelID" name="UserLevelID" required>
-							<option value=""></option>
-							<?php
-								$level = new level_data();
-								foreach ($level->level('') as $row) {
-								?>
-								<option value="<?php echo $row['UserLevelID'];?>" <?php if ($UserLevelID == $row['UserLevelID']) { echo "selected='selected'";} ?>><?php echo $row['UserLevel'];?></option>
-								<?php
-								}
-							?>
-						</select>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<label class="col-form-label col-sm-12 text-sm-center">Modul</label>
-				<hr class="my-2">
-			</div>
-			<?php
-				$groups = new groups();
-				foreach ($groups->group_list() as $row) {
-					$GroupModulID	=	$row['GroupModulID'];
-					$GroupModul		=	$row['GroupModul'];
-			?>
-			<div class="col-md-12"> <!-- Modul-->
-				<div class="form-group row">
-				<label class="col-form-label col-sm-4 text-sm-left align-middle"><?php echo $GroupModul;?></label>
-				<div class="col-sm-8">
-					<div class="input-group">
-						<?php 
-						$moduls = new moduls();
-						foreach ($moduls->modul_list($GroupModulID) as $row) {
-							$ModulID 	=	$row['ModulID'];
-							$Modul 		=	$row['Modul'];
-						?>
-						<label class="custom-control custom-checkbox form-check-inline">
-							<input type="checkbox" class="custom-control-input" id="ModulID[<?php echo $ModulID;?>]" name="ModulID[]" value="<?php echo $ModulID;?>" <?php if (in_array($ModulID,$DModulID)) { echo 'checked'; };?>>
-							<span class="custom-control-label"><?php echo $Modul;?></span>
-						</label>
-						<?php
-						}
-						?>
-					</div>
-				</div>
-				</div>
-			</div>					
-			<?php
-				}
-			?>
-			
-		</div>
-		<?php
-	}
-	if ($modul == 'hapus_user' && $submodul == 'login') {
+	if ($modul == 'hapus_user') {
 	?>
 	<div class="row">
 		<div class="col-md-12 text-center"> 
@@ -284,28 +162,73 @@
 		</div>
 	</div>
 	<?php
-	}
-	if ($modul == 'hapus_user' && $submodul == 'level') {
+	} 
+	if ($modul == 'lihat_user') {
 	?>
-		<div class="row">
-			<div class="col-md-12 text-center"> 
-				Hapus Level dengan ID : <?php echo $id;?> ?
-			</div>
+	<div class="row">
+		<div class="col-12">
+			<table id="mytable" class="table table-borderless table-sm">
+				<thead>
+					<tr>
+						<th></th>
+						<th class="text-right"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>UserID</td>
+						<td class="text-right"><?php echo $id;?></td>
+					</tr>
+					<tr>
+						<td>Nama Lengkap</td>
+						<td class="text-right"><?php echo $NamaLengkap;?></td>
+					</tr>
+					<tr>
+						<td>Username</td>
+						<td class="text-right"><?php echo $Username;?></td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td class="text-right"><?php echo $Email;?></td>
+					</tr>
+					<tr>
+						<td>No Telp</td>
+						<td class="text-right"><?php echo $NoTelp;?></td>
+					</tr>
+					<tr>
+						<td>Tgl Buat</td>
+						<td class="text-right"><?php echo $TglBuat;?></td>
+					</tr>
+					<tr>
+						<td>Status</td>
+						<td class="text-right">
+							<?php 
+								if ($StatusID == '12') {
+								echo '<span class="badge badge-warning">'.$Status.'</span>';
+								}
+								else if ($StatusID == '11') {
+								echo '<span class="badge badge-success">'.$Status.'</span>';
+								}
+							?>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
+	</div>
+	
+	
 	<?php
 	}
-	if ($modul == 'hapus_user' && $submodul == 'akses') {
-		?>
-			<div class="row">
-				<div class="col-md-12 text-center"> 
-					Hapus Level dengan ID : <?php echo $id;?> ?
-				</div>
-			</div>
-		<?php
-		}
 ?>
 ---
-<?php if ($modul == 'tambah_user' || $modul == 'ubah_user') { ?>
+<?php if ($modul == 'tambah_user') { ?>
+	<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+	<button type="submit" class="btn btn-primary">Simpan</button>
+	<?php 
+	} 
+	if ($modul == 'ubah_user') { 
+	?>
 	<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
 	<button type="submit" class="btn btn-primary">Simpan</button>
 	<?php 
