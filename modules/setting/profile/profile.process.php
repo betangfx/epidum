@@ -4,33 +4,27 @@
 	$modul 			= isset($_POST['modul']) 			? 	$_POST['modul'] 		:   NULL;
 	$submodul		= isset($_POST['submodul']) 		? 	$_POST['submodul']		:   NULL;
 	$UserID			= isset($_POST['UserID']) 			? 	$_POST['UserID'] 		:   NULL;
+	$NIP			= isset($_POST['NIP'])				?	$_POST['NIP']			:   NULL;
 	$NamaLengkap	= isset($_POST['NamaLengkap'])		?	$_POST['NamaLengkap']	:   NULL;
-	$Username		= isset($_POST['Username'])		    ?	$_POST['Username']		:	NULL;
-	$Password		= isset($_POST['Password'])			?	$_POST['Password']		:	NULL;
+	$TempatLahir	= isset($_POST['TempatLahir'])		?	$_POST['TempatLahir']	:	NULL;
+	$TanggalLahir	= isset($_POST['TanggalLahir'])		?	$_POST['TanggalLahir']	:	NULL;
 	$Email      	= isset($_POST['Email'])	        ?	$_POST['Email']	        :	NULL;
 	$NoTelp			= isset($_POST['NoTelp'])			?	$_POST['NoTelp']		:	NULL;
-	$UserLevelID	= isset($_POST['UserLevelID'])		?	$_POST['UserLevelID']	:	NULL;
-	$StatusID		= isset($_POST['StatusID'])		    ?	$_POST['StatusID']	    :	NULL;
+	$Alamat			= isset($_POST['Alamat'])			?	$_POST['Alamat']		:	NULL;
+	$Kota			= isset($_POST['Kota'])		   		?	$_POST['Kota']	    	:	NULL;
+	$Provinsi		= isset($_POST['Provinsi'])		   	?	$_POST['Provinsi']	    :	NULL;
+	$Kodepos		= isset($_POST['Kodepos'])		   	?	$_POST['Kodepos']	    :	NULL;
 
-	if ($modul == 'tambah_user') {
-		$Aksi = new aksi_user();
-		$result = $Aksi->tambah($id, $NamaLengkap, $Username, $Password, $Email, $NoTelp, $UserLevelID, $StatusID, $UserID);
-		echo $result;
-	}
-	if ($modul == 'ubah_user') {
-		$Aksi = new aksi_user();
-		$result = $Aksi->ubah($id, $NamaLengkap, $Username, $Password, $Email, $NoTelp, $UserLevelID, $StatusID, $UserID);
-		echo $result;
-	}
-	if ($modul == 'hapus_user') {
-		$Aksi = new aksi_user();
-		$result = $Aksi->hapus($id);
-		echo $result;
-	}
-
-	if ($submodul == 'lihat_user') {
-		$Aksi = new user_data();
-		$result = $Aksi->user($id);
-		echo json_encode($result);
-	}
-?>	
+	$profil = new profil_data();
+	$row = count($profil->profil($UserID));
+	if ($row > 0) {
+			$Aksi = new aksi_profil();
+			$result = $Aksi->ubah($NIP, $NamaLengkap, $TempatLahir, $TanggalLahir, $Email, $NoTelp, $Alamat, $Kota, $Provinsi, $Kodepos, $UserID);
+			echo $result;
+			
+		} else	{
+			$Aksi = new aksi_profil();
+			$result = $Aksi->tambah($NIP, $NamaLengkap, $TempatLahir, $TanggalLahir, $Email, $NoTelp, $Alamat, $Kota, $Provinsi, $Kodepos, $UserID);
+			echo $result;
+		}
+?>

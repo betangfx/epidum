@@ -13,10 +13,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center align-middle">No</th>
-                                <th class="text-center align-middle">Nama Lengkap</th>
                                 <th class="text-center align-middle">Username</th>
-                                <th class="text-center align-middle">Email</th>
-                                <th class="text-center align-middle">No. Telp</th>
                                 <th class="text-center align-middle">Level</th>
                                 <th class="text-center align-middle">Status</th>
                                 <th class="text-center align-middle">Aksi</th>
@@ -28,20 +25,14 @@
                                 $user = new user_data();
                                 foreach($user->user('') as $row){ 
                                     $id		        =	$row['UserID'];
-                                    $Nama	        =	$row['Nama'];
                                     $Username		=	$row['Username'];
-                                    $Email	        =	$row['Email'];
-                                    $NoTelp     	=	$row['NoTelp'];
                                     $UserLevel		=	$row['UserLevel'];
                                     $StatusID		=	$row['StatusID'];
                                     $Status		    =	$row['Status'];
                                 ?>
                             <tr>
                                 <td><?php echo $no++;?></td>
-                                <td><?php echo $Nama;?></td>
                                 <td><?php echo $Username;?></td>
-                                <td><?php echo $Email;?></td>
-                                <td><?php echo $NoTelp;?></td>
                                 <td><?php echo $UserLevel;?></td>
                                 <td>
                                     <?php 
@@ -54,34 +45,19 @@
                                     ?>
                                 </td>
                                 <td>
-                                <a class="align-middle text-center" href="" alt="Detail User"
-                                        title="Detail User" data-target="#newModal" data-toggle="modal"
-                                        data-backdrop="static" data-size="sm" data-action="lihat"
-                                        data-header="Detail User"
-                                        data-sub-header="" data-module="user"
-                                        data-submodule="login" data-form="user"
-                                        data-folder="setting" data-id="<?php echo $id;?>"
-                                        data-UserID="<?php echo $UserID;?>">
+                                    <a class="align-middle text-center" href="" alt="Detail User" title="Detail User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                        data-action="lihat" data-header="Detail User" data-sub-header="" data-module="user" data-submodule="login" data-form="user" data-folder="setting"
+                                        data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="zoom-in"></i>
                                     </a>
-                                    <a class="align-middle text-center" href="" alt="Ubah User"
-                                        title="Ubah User" data-target="#newModal" data-toggle="modal"
-                                        data-backdrop="static" data-size="sm" data-action="ubah"
-                                        data-header="Ubah User"
-                                        data-sub-header="" data-module="user"
-                                        data-submodule="login" data-form="user"
-                                        data-folder="setting" data-id="<?php echo $id;?>"
-                                        data-UserID="<?php echo $UserID;?>">
+                                    <a class="align-middle text-center" href="" alt="Ubah User" title="Ubah User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                        data-action="ubah" data-header="Ubah User" data-sub-header="" data-module="user" data-submodule="login" data-form="user" data-folder="setting"
+                                        data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="edit-3"></i>
                                     </a>
-                                    <a class="align-middle text-center" href="" alt="Hapus User"
-                                        title="Hapus User" data-target="#newModal" data-toggle="modal"
-                                        data-backdrop="static" data-size="sm" data-action="hapus"
-                                        data-header="Hapus User"
-                                        data-sub-header="" data-module="user"
-                                        data-submodule="login" data-form="user"
-                                        data-folder="setting" data-id="<?php echo $id;?>"
-                                        data-UserID="<?php echo $UserID;?>">
+                                    <a class="align-middle text-center" href="" alt="Hapus User" title="Hapus User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                        data-action="hapus" data-header="Hapus User" data-sub-header="" data-module="user" data-submodule="login" data-form="user" data-folder="setting"
+                                        data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="trash"></i>
                                     </a>
                                 </td>
@@ -93,11 +69,9 @@
                     </table>
                     <div class="row">
                         <div class="col-12 text-center">
-                        <button class="btn btn-primary" href="" alt="Tambah User" title="Tambah User"
-                        data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
-                        data-action="tambah" data-header="Tambah User" data-sub-header="" data-module="user"
-                        data-submodule="login" data-form="user" data-folder="setting" data-id=""
-                        data-UserID="<?php echo $UserID;?>">Tambah User</button>
+                            <button class="btn btn-primary" href="" alt="Tambah User" title="Tambah User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                data-action="tambah" data-header="Tambah User" data-sub-header="" data-module="user" data-submodule="login" data-form="user" data-folder="setting" data-id=""
+                                data-UserID="<?php echo $UserID;?>">Tambah User</button>
                         </div>
                     </div>
                 </div>
@@ -136,34 +110,19 @@
                                     ?>
                                 </td>
                                 <td class="text-center align-middle">
-                                <a class="align-middle text-center" href="" alt="Detail User"
-                                        title="Detail User" data-target="#newModal" data-toggle="modal"
-                                        data-backdrop="static" data-size="sm" data-action="lihat"
-                                        data-header="Detail User"
-                                        data-sub-header="" data-module="user"
-                                        data-submodule="level" data-form="user"
-                                        data-folder="setting" data-id="<?php echo $UserLevelID;?>"
-                                        data-UserID="<?php echo $UserID;?>">
+                                    <a class="align-middle text-center" href="" alt="Detail User" title="Detail User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                        data-action="lihat" data-header="Detail User" data-sub-header="" data-module="user" data-submodule="level" data-form="user" data-folder="setting"
+                                        data-id="<?php echo $UserLevelID;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="zoom-in"></i>
                                     </a>
-                                    <a class="align-middle text-center" href="" alt="Ubah User"
-                                        title="Ubah User" data-target="#newModal" data-toggle="modal"
-                                        data-backdrop="static" data-size="sm" data-action="ubah"
-                                        data-header="Ubah User"
-                                        data-sub-header="" data-module="user"
-                                        data-submodule="level" data-form="user"
-                                        data-folder="setting" data-id="<?php echo $UserLevelID;?>"
-                                        data-UserID="<?php echo $UserID;?>">
+                                    <a class="align-middle text-center" href="" alt="Ubah User" title="Ubah User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                        data-action="ubah" data-header="Ubah User" data-sub-header="" data-module="user" data-submodule="level" data-form="user" data-folder="setting"
+                                        data-id="<?php echo $UserLevelID;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="edit-3"></i>
                                     </a>
-                                    <a class="align-middle text-center" href="" alt="Hapus User"
-                                        title="Hapus User" data-target="#newModal" data-toggle="modal"
-                                        data-backdrop="static" data-size="sm" data-action="hapus"
-                                        data-header="Hapus User"
-                                        data-sub-header="" data-module="user"
-                                        data-submodule="level" data-form="user"
-                                        data-folder="setting" data-id="<?php echo $UserLevelID;?>"
-                                        data-UserID="<?php echo $UserID;?>">
+                                    <a class="align-middle text-center" href="" alt="Hapus User" title="Hapus User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                        data-action="hapus" data-header="Hapus User" data-sub-header="" data-module="user" data-submodule="level" data-form="user" data-folder="setting"
+                                        data-id="<?php echo $UserLevelID;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="trash"></i>
                                     </a>
                                 </td>
@@ -175,16 +134,14 @@
                     </table>
                     <div class="row">
                         <div class="col-12 text-center">
-                        <button class="btn btn-primary" href="" alt="Tambah User" title="Tambah User"
-                        data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
-                        data-action="tambah" data-header="Tambah User" data-sub-header="" data-module="user"
-                        data-submodule="level" data-form="user" data-folder="setting" data-id=""
-                        data-UserID="<?php echo $UserID;?>">Tambah Level</button>
+                            <button class="btn btn-primary" href="" alt="Tambah User" title="Tambah User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                data-action="tambah" data-header="Tambah User" data-sub-header="" data-module="user" data-submodule="level" data-form="user" data-folder="setting" data-id=""
+                                data-UserID="<?php echo $UserID;?>">Tambah Level</button>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane" id="Access" role="tabpanel">
-                <table id="Access_Data" class="table table-striped" style="width:100%">
+                    <table id="Access_Data" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th class="text-center align-middle">No</th>
@@ -207,7 +164,7 @@
                                 <td><?php echo $no++;?></td>
                                 <td><?php echo $UserLevel;?></td>
                                 <td>
-                                <?php 
+                                    <?php 
                                 foreach($user->hakaksesmodul($ModulID) as $row){
                                     $Modul          =    $row['Modul'];
                                     echo $Modul.', ';
@@ -215,34 +172,19 @@
                                 ?>
                                 </td>
                                 <td class="text-center align-middle">
-                                <a class="align-middle text-center" href="" alt="Detail User"
-                                        title="Detail User" data-target="#newModal" data-toggle="modal"
-                                        data-backdrop="static" data-size="sm" data-action="lihat"
-                                        data-header="Detail User"
-                                        data-sub-header="" data-module="user"
-                                        data-submodule="akses" data-form="user"
-                                        data-folder="setting" data-id="<?php echo $HakAksesID;?>"
-                                        data-UserID="<?php echo $UserID;?>">
+                                    <a class="align-middle text-center" href="" alt="Detail User" title="Detail User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                        data-action="lihat" data-header="Detail User" data-sub-header="" data-module="user" data-submodule="akses" data-form="user" data-folder="setting"
+                                        data-id="<?php echo $HakAksesID;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="zoom-in"></i>
                                     </a>
-                                    <a class="align-middle text-center" href="" alt="Ubah User"
-                                        title="Ubah User" data-target="#newModal" data-toggle="modal"
-                                        data-backdrop="static" data-size="sm" data-action="ubah"
-                                        data-header="Ubah User"
-                                        data-sub-header="" data-module="user"
-                                        data-submodule="akses" data-form="user"
-                                        data-folder="setting" data-id="<?php echo $HakAksesID;?>"
-                                        data-UserID="<?php echo $UserID;?>">
+                                    <a class="align-middle text-center" href="" alt="Ubah User" title="Ubah User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                        data-action="ubah" data-header="Ubah User" data-sub-header="" data-module="user" data-submodule="akses" data-form="user" data-folder="setting"
+                                        data-id="<?php echo $HakAksesID;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="edit-3"></i>
                                     </a>
-                                    <a class="align-middle text-center" href="" alt="Hapus User"
-                                        title="Hapus User" data-target="#newModal" data-toggle="modal"
-                                        data-backdrop="static" data-size="sm" data-action="hapus"
-                                        data-header="Hapus User"
-                                        data-sub-header="" data-module="user"
-                                        data-submodule="akses" data-form="user"
-                                        data-folder="setting" data-id="<?php echo $HakAksesID;?>"
-                                        data-UserID="<?php echo $UserID;?>">
+                                    <a class="align-middle text-center" href="" alt="Hapus User" title="Hapus User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                        data-action="hapus" data-header="Hapus User" data-sub-header="" data-module="user" data-submodule="akses" data-form="user" data-folder="setting"
+                                        data-id="<?php echo $HakAksesID;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="trash"></i>
                                     </a>
                                 </td>
@@ -254,11 +196,9 @@
                     </table>
                     <div class="row">
                         <div class="col-12 text-center">
-                        <button class="btn btn-primary" href="" alt="Tambah User" title="Tambah User"
-                        data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
-                        data-action="tambah" data-header="Tambah User" data-sub-header="Hak Akses" data-module="user"
-                        data-submodule="akses" data-form="user" data-folder="setting" data-id=""
-                        data-UserID="<?php echo $UserID;?>">Tambah Akses</button>
+                            <button class="btn btn-primary" href="" alt="Tambah User" title="Tambah User" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                data-action="tambah" data-header="Tambah User" data-sub-header="Hak Akses" data-module="user" data-submodule="akses" data-form="user" data-folder="setting" data-id=""
+                                data-UserID="<?php echo $UserID;?>">Tambah Akses</button>
                         </div>
                     </div>
                 </div>

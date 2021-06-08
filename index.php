@@ -27,9 +27,9 @@
 <body>
     <?php
 			session_start();
-			$Username	= isset($_SESSION['Username']) ? $_SESSION['Username'] : NULL;
-			$UserID		= isset($_SESSION['UserID']) ? $_SESSION['UserID'] : NULL;
-			$UserLevel	= isset($_SESSION['UserLevel']) ? $_SESSION['UserLevel'] : NULL;
+			$Username	    = isset($_SESSION['Username']) ? $_SESSION['Username'] : NULL;
+			$UserID		    = isset($_SESSION['UserID']) ? $_SESSION['UserID'] : NULL;
+			$UserLevelID	= isset($_SESSION['UserLevelID']) ? $_SESSION['UserLevelID'] : NULL;
 			if ($Username = NULL || empty($Username) && $UserID = NULL || empty($UserID) ){
 			?>
     <main class="main d-flex w-100">
@@ -97,10 +97,10 @@
     <?php 
 			}
 			else {
-				$Username	= isset($_SESSION['Username']) ? $_SESSION['Username'] : NULL;
-				$UserID		= isset($_SESSION['UserID']) ? $_SESSION['UserID'] : NULL;
-				$UserLevel	= isset($_SESSION['UserLevel']) ? $_SESSION['UserLevel'] : NULL;
-                $UAPage     = isset($_GET['page']) ? $_GET['page'] : NULL;
+				$Username	    = isset($_SESSION['Username']) ? $_SESSION['Username'] : NULL;
+				$UserID		    = isset($_SESSION['UserID']) ? $_SESSION['UserID'] : NULL;
+				$UserLevelID	= isset($_SESSION['UserLevelID']) ? $_SESSION['UserLevelID'] : NULL;
+                $UAPage         = isset($_GET['page']) ? $_GET['page'] : NULL;
 			?>
 
     <div class="wrapper">
@@ -143,70 +143,7 @@
 					else { 
                     ?>
                     <div class="row">
-                        <div class="col-12 col-lg-8 d-flex">
-                            <div id="smartwizard-arrows-success" class="col-12 wizard wizard-success mb-4">
-                                <h1 class="h3 mt-3 mb-3 text-center">4 Langkah Sukses</h1>
-                                <ul>
-                                    <li><a href="#arrows-success-step-1">Analisa</a></li>
-                                    <li><a href="#arrows-success-step-2">Rencana</a></li>
-                                    <li><a href="#arrows-success-step-3">Jurnal</a></li>
-                                    <li><a href="#arrows-success-step-4">Evaluasi</a></li>
-                                </ul>
-                                <div>
-                                    <div id="arrows-success-step-1" class="">
-                                        <blockquote class="blockquote-reverse m-b-0">
-                                            <p>
-                                                Tanpa adanya analisa, trading hanya akan menjadi seperti ajang
-                                                perjudian. Dimana trader hanya akan menebak – nebak langkah selanjutnya
-                                                dan bergantung pada keberuntungan untuk mendapatkan keuntungan.
-                                            </p>
-                                            <footer>
-                                                Revanny R. Tristia <cite title="Source Title">CAT Institute - Astronacci
-                                                    Internasional</cite>
-                                            </footer>
-                                        </blockquote>
-                                    </div>
-                                    <div id="arrows-success-step-2" class="">
-                                        <blockquote class="blockquote-reverse m-b-0">
-                                            <p>
-                                                "Jika kamu gagal dalam merencanakan, berarti kamu sendiri yang
-                                                merencanakan kegagalan itu sendiri"
-                                            </p>
-                                            <footer>
-                                                Benjamin Franklin <cite title="Source Title">Salah satu pendiri Negara
-                                                    Amerika Serikat</cite>
-                                            </footer>
-                                        </blockquote>
-                                    </div>
-                                    <div id="arrows-success-step-3" class="">
-                                        <blockquote class="blockquote-reverse m-b-0">
-                                            <p>
-                                                Melacak kesuksesan sekaligus kegagalan bertrading sangatlah penting bagi
-                                                seorang trader. Karenanya, jurnal trading forex dibutuhkan agar trading
-                                                makin efektif.
-                                            </p>
-                                            <footer>
-                                                Parmadita <cite title="Source Title">SeputarForex.com</cite>
-                                            </footer>
-                                        </blockquote>
-                                    </div>
-                                    <div id="arrows-success-step-4" class="">
-                                        <blockquote class="blockquote-reverse m-b-0">
-                                            <p>
-                                                Evaluasi trading dapat membuat Anda menuju ke arah yang lebih benar.
-                                                Dengan memperbaiki kekurangan di posisi sebelumnya, maka Anda dapat
-                                                membuat peningkatan target di posisi berikutnya. Namun, jika Anda tidak
-                                                melakukan perbaikan, Anda dapat mengulangi kesalahan lama yang membuat
-                                                Anda kehilangan banyak profit.
-                                            </p>
-                                            <footer>
-                                                Alwin Ng <cite title="Source Title">TradeYourEdge.com</cite>
-                                            </footer>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-12 col-lg-8 d-flex"></div>
                         <div class="col-12 col-lg-4 d-flex">
                             <div class="card flex-fill w-100">
                                 <div class="card-header">
@@ -316,27 +253,6 @@
 					?>
                 </div>
             </main>
-            <?php include $inc_folder . 'footer.php'; ?>
-        </div>
-        <div class="modal fade" id="globalModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form id="myform" class="form-horizontal" method="POST">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Default modal</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body m-0">
-                            <div id="globalModal" class="modal-body-data"></div>
-                        </div>
-                        <div class="modal-footer">
-                            <div id="globalModal" class="modal-footer-data"></div>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
         <div class="modal fade" id="newModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">

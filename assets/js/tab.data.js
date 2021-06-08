@@ -4,7 +4,7 @@ $(document).ready(function() {
     });
     var activeTab = localStorage.getItem('activeTab');
     if (activeTab) {
-        $('#MasterDataTab a[href="' + activeTab + '"]').tab('show');
+        $('#BerkasTab a[href="' + activeTab + '"]').tab('show');
         $('#UserTab a[href="' + activeTab + '"]').tab('show');
     }
 });

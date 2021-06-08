@@ -1,81 +1,45 @@
 $(document).ready(function() {
-    $('#globalModal').on('show.bs.modal', function(e) {
-        var size = $(e.relatedTarget).data('size');
-        var action = $(e.relatedTarget).data('action');
-        var sub = $(e.relatedTarget).data('sub');
-        var header = $(e.relatedTarget).data('header');
-        var folder = $(e.relatedTarget).data('folder');
-        var page = $(e.relatedTarget).data('page');
-        var id = $(e.relatedTarget).data('id');
-        var UserID = $(e.relatedTarget).data('UserID');
-        var UserLevel = $(e.relatedTarget).data('UserLevel');
-        if (action == 'tambah') {
-            $('#globalModal .modal-dialog').addClass('modal-dialog').addClass('modal-' + size);
-            $('#globalModal .modal-title').text('Form ' + header);
-            $('#globalModal .modal-header .close').hide();
-            var modul = action + '_' + page;
-            $.ajax({
-                type: 'POST',
-                url: '../page/' + folder + '/' + page + '.form.php',
-                data: { 'ID': id, 'UserID': UserID, 'UserLevel': UserLevel, 'modul': modul, 'sub': sub },
-                success: function(data) {
-                    var divs = data.split('---');
-                    $('#globalModal .modal-body-data').html(divs[0]);
-                    $('#globalModal .modal-footer-data').html(divs[1]);
-                }
-            });
 
-        }
-        if (action == 'ubah') {
-            $('#globalModal .modal-dialog').addClass('modal-dialog').addClass('modal-' + size);
-            $('#globalModal .modal-title').text('Form ' + header + ' ID: ' + id);
-            var modul = action + '_' + page;
-            $.ajax({
-                type: 'POST',
-                url: '../page/' + folder + '/' + page + '.form.php',
-                data: { 'ID': id, 'UserID': UserID, 'UserLevel': UserLevel, 'modul': modul, 'sub': sub },
-                success: function(data) {
-                    var divs = data.split('---');
-                    $('#globalModal .modal-body-data').html(divs[0]);
-                    $('#globalModal .modal-footer-data').html(divs[1]);
+    $('#submit_profile').click(function() {
+        var UserID = $('#UserID').val();
+        var UserLevelID = $('#UserLevelID').val();
+        var NIP = $('#NIP').val();
+        var NamaLengkap = $('#NamaLengkap').val();
+        var TempatLahir = $('#TempatLahir').val();
+        var TanggalLahir = $('#TanggalLahir').val();
+        var NoTelp = $('#NoTelp').val();
+        var Email = $('#Email').val();
+        var Alamat = $('#Alamat').val();
+        var Kota = $('#Kota').val();
+        var Provinsi = $('#Provinsi').val();
+        var Kodepos = $('#Kodepos').val();
+        $.ajax({
+            type: 'POST',
+            url: '../modules/setting/profile/profile.process.php',
+            data: {
+                'UserID': UserID,
+                'UserLevelID': UserLevelID,
+                'NIP': NIP,
+                'NamaLengkap': NamaLengkap,
+                'TempatLahir': TempatLahir,
+                'TanggalLahir': TanggalLahir,
+                'NoTelp': NoTelp,
+                'Email': Email,
+                'Alamat': Alamat,
+                'Kota': Kota,
+                'Provinsi': Provinsi,
+                'Kodepos': Kodepos,
+                'modul': 'profile'
+            },
+            success: function(hasil) {
+                if (hasil == 'sukses' || hasil == 'sukses	') {
+                    location.href = "/index.php?page=profile"
+                } else {
+                    alert();
                 }
-            });
-
-        }
-        if (action == 'hapus') {
-            $('#globalModal .modal-dialog').removeClass('modal-dialog').removeClass('modal-dialog').removeClass('modal-lg').addClass('modal-dialog').addClass('modal-' + size);
-            $('#globalModal .modal-title').text('Form ' + header + ' ID: ' + id);
-            var modul = action + '_' + page;
-            $.ajax({
-                type: 'POST',
-                url: '../page/' + folder + '/' + page + '.form.php',
-                data: { 'ID': id, 'UserID': UserID, 'UserLevel': UserLevel, 'modul': modul, 'sub': sub },
-                success: function(data) {
-                    var divs = data.split('---');
-                    $('#globalModal .modal-body-data').html(divs[0]);
-                    $('#globalModal .modal-footer-data').html(divs[1]);
-                }
-            });
-
-        }
-        if (action == 'lihat') {
-            $('#globalModal .modal-dialog').removeClass('modal-dialog').removeClass('modal-dialog').removeClass('modal-lg').addClass('modal-dialog').addClass('modal-' + size);
-            $('#globalModal .modal-title').text('');
-            var modul = action + '_' + page;
-            $.ajax({
-                type: 'POST',
-                url: '../page/' + folder + '/' + page + '.form.php',
-                data: { 'ID': id, 'UserID': UserID, 'UserLevel': UserLevel, 'modul': modul, 'sub': sub },
-                success: function(data) {
-                    var divs = data.split('---');
-                    $('#globalModal .modal-body-data').html(divs[0]);
-                    $('#globalModal .modal-footer-data').html(divs[1]);
-                }
-            });
-
-        }
+            }
+        })
     });
-
 
     $('#newModal').on('show.bs.modal', function(e) {
         var action = $(e.relatedTarget).data('action');

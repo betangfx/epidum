@@ -7,11 +7,8 @@
 	$UserID		= isset($_POST['UserID']) 	? $_POST['UserID'] 	: NULL;
 	
 	if ($modul == 'tambah_user' && $submodul == 'login') {
-		$NamaLengkap 	= '';
 		$Username 		= '';
 		$Password		= '';
-		$Email 			= '';
-		$NoTelp 		= '';
 		$UserLevelID 	= '';
 		$StatusID 		= '';
 		$UserBuat 		= '';
@@ -33,11 +30,8 @@
 	if ($modul == 'ubah_user' && $submodul == 'login') {
 		$user = new user_data();
 		foreach ($user->user($id) as $row) {
-			$NamaLengkap 	= $row['Nama'];
 			$Username 		= $row['Username'];
 			$Password 		= $row['Password'];
-			$Email 			= $row['Email'];
-			$NoTelp 		= $row['NoTelp'];
 			$UserLevelID 	= $row['UserLevelID'];
 			$StatusID 		= $row['StatusID'];
 			$Status			= $row['Status'];
@@ -91,14 +85,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-12"> <!-- Nama-->
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4 text-sm-left">Nama Lengkap</label>
-				<div class="col-sm-8">
-					<input type="text" class="form-control text-center" id="NamaLengkap" name="NamaLengkap" value="<?php echo $NamaLengkap;?>" required>
-				</div>
-			</div>
-		</div>
 		<div class="col-md-12"> <!-- Username -->
 			<div class="form-group row">
 				<label class="col-form-label col-sm-4 text-sm-left">Username</label>
@@ -112,22 +98,6 @@
 				<label class="col-form-label col-sm-4 text-sm-left">Password</label>
 				<div class="col-sm-8">
 					<input type="text" class="form-control text-center" id="Password" name="Password" value="" autocomplete="off" <?php if ($modul == 'tambah_user') {echo "required";}?>>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12"> <!-- Email -->
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4 text-sm-left">Email</label>
-				<div class="col-sm-8">
-					<input type="text" class="form-control text-center" id="Email" name="Email" value="<?php echo $Email;?>" required>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12"> <!-- No. Telp -->
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4 text-sm-left">No. Telp</label>
-				<div class="col-sm-8">
-					<input type="text" class="form-control text-center" id="NoTelp" name="NoTelp" value="<?php echo $NoTelp;?>" required>
 				</div>
 			</div>
 		</div>

@@ -9,6 +9,9 @@ $(document).ready(function() {
         //     responsive: true,
         //     "pagingType": "simple"
         // });
+    table = $("#Berkas_Umum").DataTable({
+        responsive: true
+    });
 
     table = $("#Users_Data, #Levels_Data, #Access_Data").DataTable({
         responsive: true

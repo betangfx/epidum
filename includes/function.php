@@ -50,10 +50,10 @@
 			return $hasil;
 		}
 		
-		function getusermenuList($UserLevel) {
+		function getusermenuList($UserLevelID) {
 			$this->db = new database();
 			$conn = $this->db->koneksi;
-			$sql = "SELECT ModulID FROM user_hakakses WHERE UserLevelID = '$UserLevel'";
+			$sql = "SELECT ModulID FROM user_hakakses WHERE UserLevelID = '$UserLevelID'";
 			$query = mysqli_query( $conn , $sql);
 			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{
@@ -67,7 +67,7 @@
 			$this->db = new database();
 			$conn = $this->db->koneksi;
 			$hasil = array();
-			$sql = "SELECT * FROM app_modul WHERE GroupModulID = $GroupMenuID AND ModulID IN ($UserMenuIDList)";
+			$sql = "SELECT * FROM app_modul WHERE GroupModulID = $GroupMenuID AND ModulID IN ($UserMenuIDList) ORDER BY Urutan ASC";
 			$query = mysqli_query($conn, $sql);
 			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
 			{

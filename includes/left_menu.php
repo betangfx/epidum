@@ -2,7 +2,7 @@
     <?php 
 		$left_menu = new left_menu();
 		$GroupMenuList 		= $left_menu->getgroupmenu();
-		$UserMenuIDList 	= $left_menu->getusermenuList($UserLevel);
+		$UserMenuIDList 	= $left_menu->getusermenuList($UserLevelID);
 		
 		foreach ($GroupMenuList as $row) {
 			$GroupMenuID 	= $row['GroupModulID'];

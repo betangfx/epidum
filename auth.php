@@ -13,7 +13,7 @@
 				$_SESSION['UserID']     = $row['UserID'];
 				$_SESSION['Username']   = $row['Username'];
 				$_SESSION['password']   = $row['Password'];
-				$_SESSION['UserLevel']  = $row['UserLevel'];
+				$_SESSION['UserLevelID']  = $row['UserLevelID'];
 				if($_SESSION['Username']){
 					echo 'sukses';
 				}

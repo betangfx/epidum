@@ -1,110 +1,142 @@
 <div class="row">
     <div class="col-12">
+        <h1 class="text-center">Profil Pengguna</h1>
         <div class="card">
-            <div class="card-header">
-                <?php if ($UserLevel == '1' || $UserLevel == '2') {
-                echo '
-				    <button class="btn btn-primary float-right" href="" alt="Tambah User" title="Tambah User"
-                    data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
-                    data-action="tambah" data-header="Tambah User" data-sub-header="" data-module="user"
-                    data-submodule="" data-form="user" data-folder="setting" data-id=""
-                    data-UserID="<?php echo $UserID;?>">Tambah User</button>
-                    ';
-                } else {
-
-                }
-                ?>
-                <h1 class=" card-title">Daftar User</h1>
-            </div>
             <div class="card-body">
-                <table id="list_user" class="table table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th class="text-center align-middle">No</th>
-                            <th class="text-center align-middle">Nama Lengkap</th>
-                            <th class="text-center align-middle">Username</th>
-                            <th class="text-center align-middle">Email</th>
-                            <th class="text-center align-middle">No. Telp</th>
-                            <th class="text-center align-middle">Level</th>
-                            <th class="text-center align-middle">Status</th>
-                            <th class="text-center align-middle">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-							$no = 1;
-							
-                            if ($UserLevel == '1' || $UserLevel == '2') {
-                                $UserByLevel = '';
-                            } else {
-                                $UserByLevel = $UserID;
-                            }
-                            $user = new user_data();
- 							foreach($user->user($UserByLevel) as $row){ 
-								$id		        =	$row['UserID'];
-								$Nama	        =	$row['Nama'];
-								$Username		=	$row['Username'];
-								$Email	        =	$row['Email'];
-								$NoTelp     	=	$row['NoTelp'];
-								$UserLevel		=	$row['UserLevel'];
-                                $StatusID		=	$row['StatusID'];
-                                $Status		    =	$row['Status'];
-							?>
-                        <tr>
-                            <td><?php echo $no++;?></td>
-                            <td><?php echo $Nama;?></td>
-                            <td><?php echo $Username;?></td>
-                            <td><?php echo $Email;?></td>
-                            <td><?php echo $NoTelp;?></td>
-                            <td><?php echo $UserLevel;?></td>
-                            <td>
-                                <?php 
-									if ($StatusID == '12') {
-									echo '<span class="badge badge-warning">'.$Status.'</span>';
-									}
-									else if ($StatusID == '11') {
-									echo '<span class="badge badge-success">'.$Status.'</span>';
-									}
-								?>
-                            </td>
-                            <td>
-							<a class="align-middle text-center" href="" alt="Detail User"
-                                    title="Detail User" data-target="#newModal" data-toggle="modal"
-                                    data-backdrop="static" data-size="sm" data-action="lihat"
-                                    data-header="Detail User"
-                                    data-sub-header="" data-module="user"
-                                    data-submodule="" data-form="user"
-                                    data-folder="setting" data-id="<?php echo $id;?>"
-                                    data-UserID="<?php echo $UserID;?>">
-                                    <i class="align-middle" data-feather="zoom-in"></i>
-                                </a>
-                                <a class="align-middle text-center" href="" alt="Ubah User"
-                                    title="Ubah User" data-target="#newModal" data-toggle="modal"
-                                    data-backdrop="static" data-size="sm" data-action="ubah"
-                                    data-header="Ubah User"
-                                    data-sub-header="" data-module="user"
-                                    data-submodule="" data-form="user"
-                                    data-folder="setting" data-id="<?php echo $id;?>"
-                                    data-UserID="<?php echo $UserID;?>">
-                                    <i class="align-middle" data-feather="edit-3"></i>
-                                </a>
-                                <a class="align-middle text-center" href="" alt="Hapus User"
-                                    title="Hapus User" data-target="#newModal" data-toggle="modal"
-                                    data-backdrop="static" data-size="sm" data-action="hapus"
-                                    data-header="Hapus User"
-                                    data-sub-header="" data-module="user"
-                                    data-submodule="" data-form="user"
-                                    data-folder="setting" data-id="<?php echo $id;?>"
-                                    data-UserID="<?php echo $UserID;?>">
-                                    <i class="align-middle" data-feather="trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <?php
-							}
-						?>
-                    </tbody>
-                </table>
+                <?php
+                // check if profil exist
+                $profil = new profil_data();
+                $row = count($profil->profil($UserID));
+                if ($row > 0) {
+                    foreach($profil->profil($UserID) as $row) {
+                    $UserIDProfil           =   $row['UserID'];
+                    $UsernameProfil         =   $row['Username'];
+                    $UserLevelIDProfil      =   $row['UserLevelID'];
+                    $UserLevelProfil        =   $row['UserLevel'];
+                    $NIP                    =   $row['NIP'];
+                    $NamaLengkap            =   $row['NamaLengkap'];
+                    $TempatLahir            =   $row['TempatLahir'];
+                    $TanggalLahir           =   $row['TanggalLahir'];
+                    $NoTelp                 =   $row['NoTelp'];
+                    $Email                  =   $row['Email'];
+                    $Alamat                 =   $row['Alamat'];
+                    $Kota                   =   $row['Kota'];
+                    $Provinsi               =   $row['Provinsi'];
+                    $Kodepos                =   $row['Kodepos'];
+                    }
+                  } else {
+                    $UserIDProfil           =   $UserID;
+                    $UsernameProfil         =   $Username;
+                    $UserLevelIDProfil      =   $UserLevelID;
+                    $level = new level_data();
+					foreach ($level->level($UserLevelID) as $row) {
+                    $UserLevelProfil        =   $row['UserLevel'];
+                    }
+                    $NIP                    =   '';
+                    $NamaLengkap            =   '';
+                    $TempatLahir            =   '';
+                    $TanggalLahir           =   '';
+                    $NoTelp                 =   '';
+                    $Email                  =   '';
+                    $Alamat                 =   '';
+                    $Kota                   =   '';
+                    $Provinsi               =   '';
+                    $Kodepos                =   '';
+                  }
+            ?>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-row">
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <input type="hidden" class="form-control" id="ID" name="ID" value="<?php echo $id;?>">
+                                </div>
+                                <div class="input-group">
+                                    <input type="hidden" class="form-control" id="modul" name="modul" value="<?php echo $modul;?>">
+                                </div>
+                                <div class="input-group">
+                                    <input type="hidden" class="form-control" id="submodul" name="submodul" value="<?php echo $submodul;?>">
+                                </div>
+                                <div class="input-group">
+                                    <input type="hidden" class="form-control" id="UserID" name="UserID" value="<?php echo $UserID;?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputFirstName">Username</label>
+                                <input type="text" class="form-control" id="Username" name="Username" value="<?php echo $UsernameProfil;?>" readonly>
+                                <input type="hidden" class="form-control" id="UserID" name="UserID" value="<?php echo $UserIDProfil;?>">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputLastName">Userlevel</label>
+                                <input type="text" class="form-control" id="UserLevel" name="UserLevel" value="<?php echo $UserLevelProfil;?>" readonly>
+                                <input type="hidden" class="form-control" id="UserLevelID" name="UserLevelID" value="<?php echo $UserLevelIDProfil;?>">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputFirstName">Nomor Induk Pegawai</label>
+                                <input type="text" class="form-control" id="NIP" name="NIP" value="<?php echo $NIP;?>" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputLastName">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="NamaLengkap" name="NamaLengkap" value="<?php echo $NamaLengkap;?>" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputFirstName">Tempat Lahir</label>
+                                <input type="text" class="form-control" id="TempatLahir" name="TempatLahir" value="<?php echo $TempatLahir;?>" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputLastName">Tanggal Lahir</label>
+                                <input type="text" class="form-control" id="TanggalLahir" name="TanggalLahir" value="<?php echo $TanggalLahir;?>" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputFirstName">No. Telp / HP</label>
+                                <input type="text" class="form-control" id="NoTelp" name="NoTelp" value="<?php echo $NoTelp;?>" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputLastName">Email</label>
+                                <input type="text" class="form-control" id="Email" name="Email" value="<?php echo $Email;?>" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="inputFirstName">Alamat</label>
+                                <input type="text" class="form-control" id="Alamat" name="Alamat" value="<?php echo $Alamat;?>" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="inputFirstName">Kabupaten/Kota</label>
+                                <input type="text" class="form-control" id="Kota" name="Kota" value="<?php echo $Kota;?>" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputLastName">Provinsi</label>
+                                <input type="text" class="form-control" id="Provinsi" name="Provinsi" value="<?php echo $Provinsi;?>" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputLastName">Kode Pos</label>
+                                <input type="text" class="form-control" id="Kodepos" name="Kodepos" value="<?php echo $Kodepos;?>" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <img alt="Chris Wood" src="<?php echo $site_url;?>/images/avatars/avatar.jpg" class="rounded-circle img-responsive mt-2" width="256" height="256">
+                            <div class="mt-2">
+                                <span class="btn btn-primary"><i class="fas fa-upload"></i> Upload</span>
+                            </div>
+                            <small>For best results, use an image at least 128px by 128px in .jpg format</small>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" id="submit_profile" class="btn btn-primary">Simpan</button>
             </div>
         </div>
     </div>
