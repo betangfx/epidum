@@ -47,14 +47,14 @@
                                     ?>
                                 </td>
                                 <td>
-                                   <a class="align-middle text-center" href="" alt="Ubah Berkas" title="Ubah Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                    <a class="align-middle text-center" href="" alt="Ubah Berkas" title="Ubah Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
                                         data-action="ubah" data-header="Ubah Berkas" data-sub-header="" data-module="berkas" data-submodule="umum" data-form="berkas" data-folder="setting"
                                         data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="edit-3"></i>
                                     </a>
-                                    <a class="align-middle text-center" href="" alt="Hapus Berkas" title="Hapus Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
-                                        data-action="hapus" data-header="Hapus Berkas" data-sub-header="" data-module="berkas" data-submodule="umum" data-form="berkas" data-folder="setting"
-                                        data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
+                                    <a class="align-middle text-center" href="" alt="Hapus Berkas" title="Hapus Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static"
+                                        data-size="sm" data-action="hapus" data-header="Hapus Berkas" data-sub-header="" data-module="berkas" data-submodule="umum" data-form="berkas"
+                                        data-folder="setting" data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
                                         <i class="align-middle" data-feather="trash"></i>
                                     </a>
                                 </td>

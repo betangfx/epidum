@@ -94,7 +94,7 @@
 	
 
 	class No {
-		function NoAnalisa($Analisa,$Req,$UserID) {
+		function NoPerkara($Analisa,$Req,$UserID) {
 			$this->db = new database();
 			$conn = $this->db->koneksi;
 			// Check No
