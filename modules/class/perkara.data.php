@@ -4,9 +4,8 @@
 			$this->db = new database();
 			$conn = $this->db->koneksi;
 			$hasil = array();
-			if ($PerkaraID != '') {
-				$sql = "SELECT a.* FROM perkara a
-						WHERE a.PerkaraID=$PerkaraID";
+			if (!empty($PerkaraID)) {
+				$sql = "SELECT a.* FROM perkara a WHERE a.PerkaraID ='$PerkaraID'";
 			} else {
 				$sql = "SELECT a.* FROM perkara a";
 			}
@@ -25,7 +24,8 @@
 		function tambah($id, $NoSPDP, $Tersangka, $Pelanggaran, $TglTerima, $Catatan, $UserID) {
 			$this->db 	= new database();
 			$conn 		= $this->db->koneksi;
-			$sql 		= "INSERT INTO perkara (NoSPDP, Tersangka, Pelanggaran, TglTerima, Catatan, UserBuat, TglBuat) VALUES ('$NoSPDP', '$Tersangka', '$Pelanggaran', '$TglTerima', '$Catatan', '$UserID', NOW())";
+			//$sql 		= "INSERT INTO perkara (NoSPDP, Tersangka, Pelanggaran, TglTerima, Catatan, UserBuat, TglBuat) VALUES ('$NoSPDP', '$Tersangka', '$Pelanggaran', '$TglTerima', '$Catatan', '$UserID', NOW())";
+			$sql 		= "UPDATE perkara SET NoSPDP='$NoSPDP', Tersangka='$Tersangka', Pelanggaran='$Pelanggaran', TglTerima='$TglTerima', Catatan='$Catatan' WHERE PerkaraID ='$id' ";
 			$result		= mysqli_query($conn,$sql);
 			if ($result) {
 				$hasil = 'sukses';
@@ -51,8 +51,10 @@
 			$this->db 	= new database();
 			$conn 		= $this->db->koneksi;
 			$sql 		= "DELETE FROM perkara WHERE PerkaraID='$id'";
+			$sql2 		= "DELETE FROM manajemen WHERE PerkaraID='$id'";
 			$result		= mysqli_query($conn,$sql);
-			if ($result) {
+			$result2	= mysqli_query($conn,$sql2);
+			if ($result && $result2) {
 				$hasil = 'sukses';
 			} else {
 				$hasil = 'gagal hapus data';

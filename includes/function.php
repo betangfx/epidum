@@ -94,195 +94,35 @@
 	
 
 	class No {
-		function NoPerkara($Analisa,$Req,$UserID) {
+		function Perkara($new,$UserID) {
 			$this->db = new database();
 			$conn = $this->db->koneksi;
 			// Check No
 			$today 		=	date('Y-m-d');
-			if ($Analisa == 'simple'){
-				$sql 	= "SELECT MAX(AnalisaID) AS AnalisaID FROM analisa_simple WHERE TglBuat LIKE '$today%' AND UserBuat = '$UserID'";
-			} else if ($Analisa == 'snd'){
-				$sql 	= "SELECT MAX(AnalisaID) AS AnalisaID FROM analisa_snd WHERE TglBuat LIKE '$today%' AND UserBuat = '$UserID'";
-			} else if ($Analisa == 'snr'){
-				$sql 	= "SELECT MAX(AnalisaID) AS AnalisaID FROM analisa_snr WHERE TglBuat LIKE '$today%' AND UserBuat = '$UserID'";
-			} else if ($Analisa == 'elliott'){
-				$sql 	= "SELECT MAX(AnalisaID) AS AnalisaID FROM analisa_elliott WHERE TglBuat LIKE '$today%' AND UserBuat = '$UserID'";
-			} 
+			$sql 	= "SELECT MAX(PerkaraID) AS PerkaraID FROM perkara WHERE TglBuat LIKE '$today%'";
 			$query 	= 	mysqli_query($conn,$sql);
 			while($result = mysqli_fetch_array($query)){
-				$AnalisaID = $result['AnalisaID'];
+				$PerkaraID = $result['PerkaraID'];
 			}
 			//Buat No
-			$SubStrNo		= substr($AnalisaID, 9, 2);
-			$NoUrutAnalisa 	= (int)$SubStrNo;
-			$NoUrutAnalisa++;
-			if ($Analisa == 'simple'){
-				$pref 	= 'SIM';
-			} else if ($Analisa == 'snd'){
-				$pref 	= 'SND';
-			} else if ($Analisa == 'snr'){
-				$pref 	= 'SNR';
-			} else if ($Analisa == 'elliott'){
-				$pref 	= 'EWP';
-			}
+			$SubStrNo		= substr($PerkaraID, 7, 2);
+			$NoUrutPerkara 	= (int)$SubStrNo;
+			$NoUrutPerkara++;
+			$pref 		= 	'P';
 			$day		=	date('ymd');
-			$new_id		=	$pref.$day.sprintf('%02s', $NoUrutAnalisa);
+			$new_id		=	$pref.$day.sprintf('%02s', $NoUrutPerkara);
 			//Masukan ke db
-			if ($Analisa == 'simple'){
-				$sql 	= "INSERT INTO analisa_simple (AnalisaID, UserBuat) VALUES ('$new_id', '$UserID')";
-			} else if ($Analisa == 'snd'){
-				$sql 	= "INSERT INTO analisa_snd (AnalisaID, UserBuat) VALUES ('$new_id', '$UserID')";
-			} else if ($Analisa == 'snr'){
-				$sql 	= "INSERT INTO analisa_snr (AnalisaID, UserBuat) VALUES ('$new_id', '$UserID')";
-			} else if ($Analisa == 'elliott'){
-				$sql 	= "INSERT INTO analisa_elliott (AnalisaID, UserBuat) VALUES ('$new_id', '$UserID')";
-			} 
+			$sql 		= "INSERT INTO perkara (PerkaraID, UserBuat, TglBuat) VALUES ('$new_id', '$UserID', NOW())";
+			$sql2 		= "INSERT INTO manajemen (PerkaraID) VALUES ('$new_id')";
 			$result		= 	mysqli_query($conn, $sql);
-			if($result) {
+			$result2		= 	mysqli_query($conn, $sql2);
+			if($result && $result2) {
 				return $new_id;
 			} else {
-				echo 'gagal tambah analisaid';
-			}
-		}
-		function NoRencana($req, $UserID) {
-			$this->db = new database();
-			$conn = $this->db->koneksi;
-			// Check No
-			$today 		=	date('Y-m-d');
-			$sql 	= "SELECT MAX(RencanaID) AS RencanaID FROM rencana WHERE TglBuat LIKE '$today%' AND UserBuat = '$UserID'"; 
-			$query 	= 	mysqli_query($conn,$sql);
-			while($result = mysqli_fetch_array($query)){
-				$RencanaID = $result['RencanaID'];
-			}
-			//Buat No
-			$SubStrNo		= substr($RencanaID, 7, 2);
-			$NoUrutRencana 	= (int)$SubStrNo;
-			$NoUrutRencana++;
-			$pref 			= 'R';
-			$day			=	date('ymd');
-			$new_id			=	$pref.$day.sprintf('%02s', $NoUrutRencana);
-			
-			//Masukan ke DB
-			$sql 	= "INSERT INTO rencana (RencanaID, UserBuat) VALUES ('$new_id', '$UserID')";
-			$result		= 	mysqli_query($conn, $sql);
-			if($result) {
-				return $new_id;
-			} else {
-				echo 'gagal tambah rencanaid';
-			}
-		}
-
-		function NoJurnal($req, $UserID) {
-			$this->db = new database();
-			$conn = $this->db->koneksi;
-			// Check No
-			$today 		=	date('Y-m-d');
-			$sql 	= "SELECT MAX(JurnalID) AS JurnalID FROM jurnal WHERE TglBuat LIKE '$today%' AND UserBuat = '$UserID'"; 
-			$query 	= 	mysqli_query($conn,$sql);
-			while($result = mysqli_fetch_array($query)){
-				$JurnalID = $result['JurnalID'];
-			}
-			//Buat No
-			$SubStrNo		= substr($JurnalID, 7, 2);
-			$NoUrutJurnal 	= (int)$SubStrNo;
-			$NoUrutJurnal++;
-			$pref 			= 'J';
-			$day			=	date('ymd');
-			$new_id			=	$pref.$day.sprintf('%02s', $NoUrutJurnal);
-			
-			//Masukan ke DB
-			$sql 	= "INSERT INTO jurnal (JurnalID, UserBuat) VALUES ('$new_id', '$UserID')";
-			$result		= 	mysqli_query($conn, $sql);
-			if($result) {
-				return $new_id;
-			} else {
-				echo 'gagal tambah jurnalid';
+				echo 'gagal tambah nomorperkara';
+				echo $new_id;
 			}
 		}
 	}
-	// function NoAnalisa($req, $UserID) {
-	// 	if ($req == 'New' && $UserID != '') {
-	// 		include ($_SERVER['DOCUMENT_ROOT'] . '/includes/dbold.php');
-	// 		$pref		=	'A';
-	// 		$day		=	date('ymd');
-	// 		$today 		=	date('Y-m-d');
-	// 		$sqlcheck	=	"SELECT MAX(AnalisaID) AS AnalisaID FROM analisa WHERE TglBuat LIKE '$today%' AND UserID = '$UserID'";
-	// 		$query 		= 	mysqli_query($koneksi,$sqlcheck);
-	// 		while ($data 	= mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-	// 			$max_id 	= $data['AnalisaID'];
-	// 		}
-	// 		$nosTrx		= substr($max_id, 7, 2);
-	// 		$noUrutTrx 	= (int)$nosTrx;
-	// 		$noUrutTrx++;
-	// 		$new_id		=	$pref.$day.sprintf('%02s', $noUrutTrx);
-	// 		$sqlinsert	=	"INSERT INTO analisa (AnalisaID, UserID) VALUES ('$new_id', '$UserID')";
-	// 		$insert		= 	mysqli_query($koneksi, $sqlinsert);
-	// 		if($insert) {
-	// 			return $new_id;
-	// 			} else {
-	// 			echo 'gagal tambah analisaid';
-	// 		}
-	// 		} else {
-	// 		echo 'no';
-	// 	}
-	// 	return;
-	// }
-	
-	// function NoRencana($req, $UserID) {
-	// 	if ($req == 'New' && $UserID != '') {
-	// 		include ($_SERVER['DOCUMENT_ROOT'] . '/includes/dbold.php');
-	// 		$pref		=	'R';
-	// 		$day		=	date('ymd');
-	// 		$today 		=	date('Y-m-d');
-	// 		$sqlcheck	=	"SELECT MAX(RencanaID) AS RencanaID FROM rencana WHERE TglBuat LIKE '$today%' AND UserID = '$UserID'";
-	// 		$query 		= 	mysqli_query($koneksi,$sqlcheck);
-	// 		while ($data 	= mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-	// 			$max_id 	= $data['RencanaID'];
-	// 		}
-	// 		$nosTrx		= substr($max_id, 7, 2);
-	// 		$noUrutTrx 	= (int)$nosTrx;
-	// 		$noUrutTrx++;
-	// 		$new_id		=	$pref.$day.sprintf('%02s', $noUrutTrx);
-	// 		$sqlinsert	=	"INSERT INTO rencana (RencanaID, UserID) VALUES ('$new_id', '$UserID')";
-	// 		$insert		= 	mysqli_query($koneksi, $sqlinsert);
-	// 		if($insert) {
-	// 			return $new_id;
-	// 			} else {
-	// 			echo 'gagal tambah id rencana';
-	// 		}
-	// 		} else {
-	// 		echo 'no';
-	// 	}
-	// 	return;
-	// }
-	
-	// function NoJurnal($req, $UserID) {
-	// 	if ($req == 'New' && $UserID != '') {
-	// 		include ($_SERVER['DOCUMENT_ROOT'] . '/includes/dbold.php');
-	// 		$pref		=	'J';
-	// 		$day		=	date('ymd');
-	// 		$today 		=	date('Y-m-d');
-	// 		$sqlcheck	=	"SELECT MAX(JurnalID) AS JurnalID FROM jurnal WHERE TglBuat LIKE '$today%' AND UserID = '$UserID'";
-	// 		$query 		= 	mysqli_query($koneksi,$sqlcheck);
-	// 		while ($data 	= mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-	// 			$max_id 	= $data['JurnalID'];
-	// 		}
-	// 		$nosTrx		= substr($max_id, 7, 2);
-	// 		$noUrutTrx 	= (int)$nosTrx;
-	// 		$noUrutTrx++;
-	// 		$new_id		=	$pref.$day.sprintf('%02s', $noUrutTrx);
-	// 		$sqlinsert	=	"INSERT INTO jurnal (JurnalID, UserID) VALUES ('$new_id', '$UserID')";
-	// 		$insert		= 	mysqli_query($koneksi, $sqlinsert);
-	// 		if($insert) {
-	// 			return $new_id;
-	// 			} else {
-	// 			echo 'gagal tambah id rencana';
-	// 		}
-	// 		} else {
-	// 		echo 'no';
-	// 	}
-	// 	return;
-	// 	}
-		
 		
 	?>

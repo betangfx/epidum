@@ -7,9 +7,7 @@
 	$UserID		= isset($_POST['UserID']) 	? $_POST['UserID'] 	: NULL;
 	
 	// Mulai SET Variable
-	if ($modul == 'tambah_perkara') {
-        $BuatNo = new No();
-        $id             =   $BuatNo->Perkara($id, $UserID);
+	if ($modul == 'tambah_manajemen') {
         $NoSPDP         =   '';
         $Tersangka      =   ''; 
         $Pelanggaran    =   '';
@@ -17,14 +15,17 @@
         $Catatan        =   '';
            
 	}
-	else if ($modul == 'ubah_perkara' || $modul == 'hapus_perkara') {
-        $perkara = new perkara_data();
-        foreach($perkara->perkara($id) as $row){ 
-            $id		        =	$row['PerkaraID'];
-            $NoSPDP		    =	$row['NoSPDP'];
+	else if ($modul == 'ubah_manajemen' || $modul == 'hapus_manajemen') {
+        $manajemen = new manajemen_data();
+        foreach($manajemen->manajemen($id) as $row){ 
+            $id		        =	$row['ManajemenID'];
+            $NoPerkara        =	$row['PerkaraID'];
+            $NoSPDP	        =	$row['NoSPDP'];
+            $PerkaraID	    =	$row['PerkaraID'];
             $Tersangka	    =	$row['Tersangka'];
             $Pelanggaran    =	$row['Pelanggaran'];
-            $TglTerima	    =	$row['TglTerima'];
+            $JaksaID    =	$row['JaksaID'];
+            $NamaLengkap    =	$row['NamaLengkap'];
             $Catatan        =	$row['Catatan'];
         }
     }
@@ -51,7 +52,7 @@
     </div>
 </div>
 <?php 
-    if ($modul == 'tambah_perkara' && $submodul == 'umum' || $modul == 'ubah_perkara' && $submodul == 'umum') {
+    if ($modul == 'ubah_manajemen' && $submodul == 'umum') {
 ?>
 <div class="row">
     <!-- Analisa Form Standar Value -->
@@ -64,7 +65,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                     </div>
-                    <input type="text" class="form-control" id="NoPerkara" name="NoPerkara" value="<?php echo $id;?>" disabled>
+                    <input type="text" class="form-control" id="NoPerkara" name="NoPerkara" value="<?php echo $NoPerkara;?>" disabled>
                 </div>
             </div>
         </div>
@@ -74,7 +75,7 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-4 text-sm-left">No. SPDP</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="NoSPDP" name="NoSPDP" value="<?php echo $NoSPDP;?>" required>
+                <input type="text" class="form-control" id="NoSPDP" name="NoSPDP" value="<?php echo $NoSPDP;?>" disabled>
             </div>
         </div>
     </div>
@@ -83,7 +84,7 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-4 text-sm-left">Tersangka</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="Tersangka" name="Tersangka" value="<?php echo $Tersangka;?>" required>
+                <input type="text" class="form-control" id="Tersangka" name="Tersangka" value="<?php echo $Tersangka;?>" disabled>
             </div>
         </div>
     </div>
@@ -92,21 +93,26 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-4 text-sm-left">Pelanggaran</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="Pelanggaran" name="Pelanggaran" value="<?php echo $Pelanggaran;?>" required>
+                <input type="text" class="form-control" id="Pelanggaran" name="Pelanggaran" value="<?php echo $Pelanggaran;?>" disabled>
             </div>
         </div>
     </div>
     <div class="col-md-12">
-        <!-- Tanggal Terima -->
+        <!-- JaksaID -->
         <div class="form-group row">
-            <label class="col-form-label col-sm-4 text-sm-left">Tanggal Terima</label>
+            <label class="col-form-label col-sm-4 text-sm-left">Jaksa</label>
             <div class="col-sm-8">
-                <div class="input-group date" id="TglTerimaID" data-target-input="nearest">
-                    <input type="text" id="TglTerima" name="TglTerima" class="form-control datetimepicker-input" data-target="#TglTerimaID" value="<?php echo $TglTerima;?>">
-                    <div class="input-group-append" data-target="#TglTerimaID" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
+                <select class="form-control" id="JaksaID" name="JaksaID" required>
+                    <option value=""></option>
+                    <?php
+							$user_manajemen = new manajemen_user();
+							foreach ($user_manajemen->user_manajemen() as $row) {
+							?>
+                    <option value="<?php echo $row['UserID'];?>" <?php if ($JaksaID == $row['UserID']) { echo "selected='selected'";} ?>><?php echo $row['NamaLengkap'];?></option>
+                    <?php
+							}
+						?>
+                </select>
             </div>
         </div>
     </div>
@@ -119,7 +125,7 @@
 </div>
 <?php 
 }
-if ($modul == 'hapus_perkara' && $submodul == 'umum') {
+if ($modul == 'hapus_manajemen' && $submodul == 'umum') {
 ?>
 <div class="row">
     <div class="col-md-12 text-center">
@@ -130,17 +136,11 @@ if ($modul == 'hapus_perkara' && $submodul == 'umum') {
 }
 ?>
 ---
-<?php if ($modul == 'tambah_perkara') { ?>
-<button type="button" id="batal" class="btn btn-danger">Batal</button>
-<button type="submit" class="btn btn-primary">Simpan</button>
-<?php
-}
-if ($modul == 'ubah_perkara') { 
-?>
+<?php if ($modul == 'ubah_manajemen' && $submodul == 'umum') { ?>
 <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
 <button type="submit" class="btn btn-primary">Simpan</button>
 <?php 
-} 
+	} 
 	if ($modul == 'hapus_perkara') { 
 ?>
 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -151,13 +151,6 @@ if ($modul == 'ubah_perkara') {
 <script type="text/javascript">
 $(document).ready(function() {
 
-    $('#TglTerimaID').datetimepicker({
-        format: 'YYYY-MM-DD',
-        defaultDate: $('#TglTerima').val(),
-        maxDate: new Date(),
-        sideBySide: true
-    });
-
     $('#Catatan').summernote({
         placeholder: '',
         tabsize: 2,
@@ -167,29 +160,7 @@ $(document).ready(function() {
             ['para', ['ul', 'ol', 'paragraph']]
         ]
     });
-    $('#batal').click(function() {
-        var ID      = $('#ID').val();
-        var modul   = 'hapus_perkara';
-        var submodul   = $('#submodul').val();
-        var UserID  = $('#UserID').val();
-        $.ajax({
-            type: 'POST',
-            url: '../modules/main/perkara/perkara.process.php',
-            data: {
-                'ID': ID,
-                'modul': modul,
-                'submodul': submodul,
-                'UserID': UserID
-            },
-            success: function(hasil) {
-                if (hasil == 'sukses') {
-                    location.href = "/index.php?page=perkara"
-                } else {
-                    $('#modal-data').html(hasil);
-                }
-            }
-        })
-    });
+
     $("#newForm").validate({
         errorElement: 'div',
         errorClass: 'help-block',
@@ -207,13 +178,13 @@ $(document).ready(function() {
             var formData = new FormData(form);
             $.ajax({
                 type: 'POST',
-                url: '../modules/main/perkara/perkara.process.php',
+                url: '../modules/main/manajemen/manajemen.process.php',
                 processData: false,
                 contentType: false,
                 data: formData,
                 success: function(hasil) {
                     if (hasil == 'sukses' || hasil == 'sukses	') {
-                        location.href = "/index.php?page=perkara"
+                        location.href = "/index.php?page=manajemen"
                     } else {
                         $('#modal-data').html(hasil);
                     }
