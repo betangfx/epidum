@@ -14,7 +14,9 @@
                     $UserLevelIDProfil      =   $row['UserLevelID'];
                     $UserLevelProfil        =   $row['UserLevel'];
                     $NIP                    =   $row['NIP'];
-                    $NamaLengkap            =   $row['NamaLengkap'];
+                    $PangkatID              =   $row['PangkatID'];
+                    $JabatanID              =   $row['JabatanID'];
+                    $Nama                   =   $row['Nama'];
                     $TempatLahir            =   $row['TempatLahir'];
                     $TanggalLahir           =   $row['TanggalLahir'];
                     $NoTelp                 =   $row['NoTelp'];
@@ -33,7 +35,9 @@
                     $UserLevelProfil        =   $row['UserLevel'];
                     }
                     $NIP                    =   '';
-                    $NamaLengkap            =   '';
+                    $PangkatID              =   '';
+                    $JabatanID              =   '';
+                    $Nama                   =   '';
                     $TempatLahir            =   '';
                     $TanggalLahir           =   '';
                     $NoTelp                 =   '';
@@ -76,12 +80,42 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
+                                <label for="inputLastName">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="Nama" name="Nama" value="<?php echo $Nama;?>" required>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="inputFirstName">Nomor Induk Pegawai</label>
                                 <input type="text" class="form-control" id="NIP" name="NIP" value="<?php echo $NIP;?>" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputLastName">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="NamaLengkap" name="NamaLengkap" value="<?php echo $NamaLengkap;?>" required>
+                                <label for="inputFirstName">Pangkat</label>
+                                <select class="form-control" id="Pangkat" name="Pangkat" required>
+                                    <option value=""></option>
+                                    <?php
+                                        $pangkat = new pangkat_data();
+							            foreach ($pangkat->pangkat('') as $row) {
+							        ?>
+                                    <option value="<?php echo $row['PangkatID'];?>" <?php if ($PangkatID == $row['PangkatID']) { echo "selected='selected'";} ?>><?php echo $row['Pangkat'];?>
+                                    </option>
+                                    <?php
+							            }
+						            ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputFirstName">Jabatan</label>
+                                <select class="form-control" id="Pangkat" name="Pangkat" required>
+                                    <option value=""></option>
+                                    <?php
+                                        $jabatan = new jabatan_data();
+							            foreach ($jabatan->jabatan('') as $row) {
+							        ?>
+                                    <option value="<?php echo $row['JabatanID'];?>" <?php if ($JabatanID == $row['JabatanID']) { echo "selected='selected'";} ?>><?php echo $row['Jabatan'];?>
+                                    </option>
+                                    <?php
+							            }
+						            ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-row">

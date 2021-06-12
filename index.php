@@ -274,7 +274,26 @@
                 </div>
             </div>
         </div>
-
+        <div class="modal fade" id="2ndModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form id="newForm" class="form-horizontal" method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title">New Modal</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body m-0">
+                            <div id="2ndModal" class="modal-body-data"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <div id="2ndModal" class="modal-footer-data"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="<?php echo $site_url;?>/assets/js/app.js"></script>

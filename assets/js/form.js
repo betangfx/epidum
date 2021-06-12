@@ -4,7 +4,9 @@ $(document).ready(function() {
         var UserID = $('#UserID').val();
         var UserLevelID = $('#UserLevelID').val();
         var NIP = $('#NIP').val();
-        var NamaLengkap = $('#NamaLengkap').val();
+        var Pangkat = $('#Pangkat').val();
+        var Jabatan = $('#Jabatan').val();
+        var Nama = $('#Nama').val();
         var TempatLahir = $('#TempatLahir').val();
         var TanggalLahir = $('#TanggalLahir').val();
         var NoTelp = $('#NoTelp').val();
@@ -20,7 +22,9 @@ $(document).ready(function() {
                 'UserID': UserID,
                 'UserLevelID': UserLevelID,
                 'NIP': NIP,
-                'NamaLengkap': NamaLengkap,
+                'Pangkat': Pangkat,
+                'Jabatan': Jabatan,
+                'Nama': Nama,
                 'TempatLahir': TempatLahir,
                 'TanggalLahir': TanggalLahir,
                 'NoTelp': NoTelp,

@@ -25,12 +25,12 @@
                             <?php
                                 $no = 1;
                                 $manajemen = new manajemen_data();
-                                foreach($manajemen->manajemen('') as $row){ 
-                                    $id		        =	$row['ManajemenID'];
+                                foreach($manajemen->proses('') as $row){ 
+                                    $id		        =	$row['ProsesID'];
                                     $PerkaraID	    =	$row['PerkaraID'];
                                     $Tersangka	    =	$row['Tersangka'];
                                     $Pelanggaran    =	$row['Pelanggaran'];
-                                    $NamaLengkap    =	$row['NamaLengkap'];
+                                    $Nama           =	$row['Nama'];
                                     $Catatan        =	$row['Catatan'];
                                 ?>
                             <tr>
@@ -38,7 +38,7 @@
                                 <td><?php echo $PerkaraID;?></td>
                                 <td><?php echo $Tersangka;?></td>
                                 <td><?php echo $Pelanggaran;?></td>
-                                <td><?php echo $NamaLengkap;?></td>
+                                <td><?php echo $Nama;?></td>
                                 <td><?php echo $Catatan?></td>
                                 <td>
                                     <a class="align-middle text-center" href="" alt="Manajemen Perkara" title="Manajemen Perkara" data-target="#newModal" data-toggle="modal" data-backdrop="static"

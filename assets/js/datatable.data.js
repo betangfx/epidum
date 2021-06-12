@@ -25,6 +25,35 @@ $(document).ready(function() {
             { className: "text-center align-middle", targets: 5 }
         ]
     });
+    table = $("#Proses_Umum").DataTable({
+        responsive: true,
+        columnDefs: [
+            { className: "text-center align-middle", targets: 0 },
+            { className: "text-center align-middle", targets: 1 },
+            { className: "text-center align-middle", targets: 3 },
+            { className: "text-center align-middle", targets: 4 },
+            { className: "text-center align-middle", targets: 5 }
+        ]
+    });
+
+    table = $("#ProsesBerkas_Umum").DataTable({
+        responsive: true,
+        "searching": false,
+        "ordering": true,
+        "info": false,
+        "paging": false,
+        columnDefs: [
+            { className: "text-center align-middle", targets: 0 },
+            { className: "text-center align-middle", targets: 1 },
+            { className: "text-center align-middle", targets: 2 },
+            { className: "text-center align-middle", targets: 3 },
+            { className: "text-center align-middle", targets: 4 },
+            { className: "text-center align-middle", targets: 5 }
+        ]
+    });
+
+
+
 
     table = $("#Berkas_Umum").DataTable({
         responsive: true,

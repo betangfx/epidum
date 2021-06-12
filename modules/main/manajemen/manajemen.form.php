@@ -7,25 +7,17 @@
 	$UserID		= isset($_POST['UserID']) 	? $_POST['UserID'] 	: NULL;
 	
 	// Mulai SET Variable
-	if ($modul == 'tambah_manajemen') {
-        $NoSPDP         =   '';
-        $Tersangka      =   ''; 
-        $Pelanggaran    =   '';
-        $TglTerima      =   '';
-        $Catatan        =   '';
-           
-	}
-	else if ($modul == 'ubah_manajemen' || $modul == 'hapus_manajemen') {
+	if ($modul == 'ubah_manajemen' || $modul == 'hapus_manajemen') {
         $manajemen = new manajemen_data();
-        foreach($manajemen->manajemen($id) as $row){ 
-            $id		        =	$row['ManajemenID'];
+        foreach($manajemen->proses($id) as $row){ 
+            $id		        =	$row['ProsesID'];
             $NoPerkara        =	$row['PerkaraID'];
             $NoSPDP	        =	$row['NoSPDP'];
             $PerkaraID	    =	$row['PerkaraID'];
             $Tersangka	    =	$row['Tersangka'];
             $Pelanggaran    =	$row['Pelanggaran'];
-            $JaksaID    =	$row['JaksaID'];
-            $NamaLengkap    =	$row['NamaLengkap'];
+            $JaksaID        =	$row['JaksaID'];
+            $Nama           =	$row['Nama'];
             $Catatan        =	$row['Catatan'];
         }
     }
@@ -98,7 +90,7 @@
         </div>
     </div>
     <div class="col-md-12">
-        <!-- JaksaID -->
+        <!-- Jaksa -->
         <div class="form-group row">
             <label class="col-form-label col-sm-4 text-sm-left">Jaksa</label>
             <div class="col-sm-8">
@@ -108,7 +100,7 @@
 							$user_manajemen = new manajemen_user();
 							foreach ($user_manajemen->user_manajemen() as $row) {
 							?>
-                    <option value="<?php echo $row['UserID'];?>" <?php if ($JaksaID == $row['UserID']) { echo "selected='selected'";} ?>><?php echo $row['NamaLengkap'];?></option>
+                    <option value="<?php echo $row['UserID'];?>" <?php if ($JaksaID == $row['UserID']) { echo "selected='selected'";} ?>><?php echo $row['Nama'];?></option>
                     <?php
 							}
 						?>

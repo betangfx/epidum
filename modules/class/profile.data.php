@@ -20,10 +20,10 @@
 
 	class aksi_profil {
 
-		function tambah($NIP, $NamaLengkap, $TempatLahir, $TanggalLahir, $Email, $NoTelp, $Alamat, $Kota, $Provinsi, $Kodepos, $UserID) {
+		function tambah($NIP, $Pangkat, $Jabatan, $Nama, $TempatLahir, $TanggalLahir, $Email, $NoTelp, $Alamat, $Kota, $Provinsi, $Kodepos, $UserID) {
 			$this->db 	= new database();
 			$conn 		= $this->db->koneksi;
-			$sql 		= "INSERT INTO user_profile (UserID, NIP,NamaLengkap, TempatLahir, TanggalLahir, Email, NoTelp, Alamat, Kota, Provinsi, Kodepos, UserBuat, TglBuat) VALUES ('$UserID', '$NIP', '$NamaLengkap', '$TempatLahir', '$TanggalLahir', '$Email', '$NoTelp', '$Alamat', '$Kota', '$Provinsi', '$Kodepos', '$UserID', NOW())";
+			$sql 		= "INSERT INTO user_profile (UserID, NIP, PangkatID, JabatanID, Nama, TempatLahir, TanggalLahir, Email, NoTelp, Alamat, Kota, Provinsi, Kodepos, UserBuat, TglBuat) VALUES ('$UserID', '$NIP', '$Pangkat', '$Jabatan', '$Nama', '$TempatLahir', '$TanggalLahir', '$Email', '$NoTelp', '$Alamat', '$Kota', '$Provinsi', '$Kodepos', '$UserID', NOW())";
 			$result		= mysqli_query($conn,$sql);
 			if ($result) {
 				$hasil = 'sukses';
@@ -33,10 +33,10 @@
 			return $hasil;	
 		}
 
-		function ubah($NIP, $NamaLengkap, $TempatLahir, $TanggalLahir, $Email, $NoTelp, $Alamat, $Kota, $Provinsi, $Kodepos, $UserID) {
+		function ubah($NIP, $Pangkat, $Jabatan, $Nama, $TempatLahir, $TanggalLahir, $Email, $NoTelp, $Alamat, $Kota, $Provinsi, $Kodepos, $UserID) {
 			$this->db 	= new database();
 			$conn 		= $this->db->koneksi;
-			$sql 		= "UPDATE user_profile SET NIP='$NIP', NamaLengkap='$NamaLengkap', TempatLahir='$TempatLahir', TanggalLahir='$TanggalLahir', Email='$Email', NoTelp='$NoTelp', Alamat='$Alamat', Kota='$Kota', Provinsi='$Provinsi', Kodepos='$Kodepos', TglEdit=NOW(), UserEdit='$UserID' WHERE UserID ='$UserID' ";
+			$sql 		= "UPDATE user_profile SET NIP='$NIP', PangkatID='$Pangkat', JabatanID='$Jabatan', Nama='$Nama', TempatLahir='$TempatLahir', TanggalLahir='$TanggalLahir', Email='$Email', NoTelp='$NoTelp', Alamat='$Alamat', Kota='$Kota', Provinsi='$Provinsi', Kodepos='$Kodepos', TglEdit=NOW(), UserEdit='$UserID' WHERE UserID ='$UserID' ";
 			$result		= mysqli_query($conn,$sql);
 			if ($result) {
 				echo 'sukses';

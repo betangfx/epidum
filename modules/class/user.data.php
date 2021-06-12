@@ -213,4 +213,34 @@
 		}
 	}
 
+	class pangkat_data {
+		function pangkat($UserID) {
+			$this->db = new database();
+			$conn = $this->db->koneksi;
+			$hasil = array();
+			$sql = "SELECT a.PangkatID, a.Pangkat FROM master_pangkat a";
+			$query = mysqli_query($conn, $sql);
+			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
+			{
+				$hasil[] = $result;
+				
+			}
+			return $hasil;
+		}
+	}
+	class jabatan_data {
+		function jabatan($UserID) {
+			$this->db = new database();
+			$conn = $this->db->koneksi;
+			$hasil = array();
+			$sql = "SELECT a.JabatanID, a.Jabatan FROM master_jabatan a";
+			$query = mysqli_query($conn, $sql);
+			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
+			{
+				$hasil[] = $result;
+				
+			}
+			return $hasil;
+		}
+	}
 ?>
