@@ -6,11 +6,11 @@
 			$hasil = array();
 			if ($BerkasID != '') {
 				$sql = "SELECT a.*, b.Status FROM berkas a 
-						LEFT JOIN status b ON a.StatusID = b.StatusID
+						LEFT JOIN master_status b ON a.StatusID = b.StatusID
 						WHERE a.BerkasID=$BerkasID";
 			} else {
 				$sql = "SELECT a.*, b.Status FROM berkas a
-						LEFT JOIN status b ON a.StatusID = b.StatusID";
+						LEFT JOIN master_status b ON a.StatusID = b.StatusID";
 			}
 			$query = mysqli_query($conn, $sql);
 			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))

@@ -4,23 +4,26 @@
 	$modul 			= isset($_POST['modul']) 			? $_POST['modul'] 	: NULL;
 	$submodul		= isset($_POST['submodul']) 		? $_POST['submodul']: NULL;
 	$UserID			= isset($_POST['UserID']) 			? $_POST['UserID'] 	: NULL;
-	$JaksaID 		= isset($_POST['JaksaID']) 			? $_POST['JaksaID'] 	: NULL;
+	$BerkasID 		= isset($_POST['BerkasID']) 		? $_POST['BerkasID'] : NULL;
+	$MulaiProses 	= isset($_POST['MulaiProses']) 		? $_POST['MulaiProses'] : NULL;
+	$AkhirProses 	= isset($_POST['AkhirProses']) 		? $_POST['AkhirProses'] : NULL;
+	$StatusID 		= isset($_POST['StatusID']) 		? $_POST['StatusID'] : NULL;
 	$Catatan		= isset($_POST['Catatan']) 			? $_POST['Catatan'] : NULL;
 
-	if ($modul == 'tambah_manajemen' && $submodul == 'umum') {
-		$Aksi = new aksi_manajemen();
-		$result = $Aksi->tambah($id, $JaksaID, $Catatan, $UserID);
+	if ($modul == 'tambah_proses' && $submodul == 'berkas') {
+		$Aksi = new aksi_proses();
+		$result = $Aksi->tambah($id, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID);
 		echo $result;
 	}
 	
-	if ($modul == 'ubah_manajemen' && $submodul == 'umum') {
-		$Aksi = new aksi_manajemen();
-		$result = $Aksi->ubah($id, $JaksaID, $Catatan, $UserID);
+	if ($modul == 'ubah_proses' && $submodul == 'berkas') {
+		$Aksi = new aksi_proses();
+		$result = $Aksi->ubah($id, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID);
 		echo $result;
 	}
 	
-	if ($modul == 'hapus_manajemen' && $submodul == 'umum') {
-		$Aksi = new aksi_manajemen();
+	if ($modul == 'hapus_proses' && $submodul == 'berkas') {
+		$Aksi = new aksi_proses();
 		$result = $Aksi->hapus($id);
 		echo $result;
 	}

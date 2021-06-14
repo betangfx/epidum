@@ -1,18 +1,46 @@
 <h1 class="h3 mb-3"><?php echo $ModuleNM;?></h1>
 <?php
-$id = isset($_GET['id']) 		? $_GET['id']: NULL;
+$listenpostid				= isset($_POST['ID']) 				? $_POST['ID'] 		: NULL;
+$listengetid				= isset($_GET['id']) 				? $_GET['id'] 		: NULL;
+if ($listengetid == '') {
+    $id = $listenpostid;
+} else {
+    $id = $listengetid;
+}
 if ($id != '') {
 ?>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="form-row">
+                <div class="mb-2 text-center">
+                    <strong>DETAIL</strong>
+                </div>
+
+                <div class="row mb-2">
                     <div class="col-md-6">
-                        a
+                        <div class="font-weight-bold">No. Register:</div>
+                        <strong>P12345678</strong>
                     </div>
+                    <div class="col-md-6 text-md-right">
+                        <div class="font-weight-bold">No. SPDP:</div>
+                        <strong>October 2, 2018 - 03:45 pm</strong>
+                    </div>
+                </div>
+                <div class="row mb-2">
                     <div class="col-md-6">
-                        b
+                        <div class="font-weight-bold">Tersangka</div>
+                        <strong>Chris Wood</strong>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <div class="font-weight-bold">Pelanggaran</div>
+                        <strong>AppStack LLC</strong>
+                    </div>
+                </div>
+                <div class="row mb-0">
+                    <div class="col-md-12 text-center">
+                        <div class="font-weight-bold">Jaksa</div>
+                        <strong>Chris Wood</strong>
                     </div>
                 </div>
             </div>
@@ -21,6 +49,9 @@ if ($id != '') {
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                <div class="mb-0 text-center">
+                    <strong>Berkas - Berkas</strong>
+                </div>
                 <table id="ProsesBerkas_Umum" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
@@ -35,7 +66,7 @@ if ($id != '') {
                     <tbody>
                         <?php
                         $no = 1;
-                        $proses = new proses_berkas();
+                        $proses = new proses_berkas_data();
                         foreach($proses->berkas($id) as $row){ 
                             $id		        =	$row['ProsesBerkasID'];
                             $KodeBerkas	    =	$row['KodeBerkas'];
@@ -50,10 +81,20 @@ if ($id != '') {
                             <td><?php echo $AkhirProses;?></td>
                             <td><?php echo $StatusID;?></td>
                             <td>
-                                <a class="align-middle text-center" href="" alt="Proses Berkas" title="Proses Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
-                                    data-action="ubah" data-header="Proses Berkas" data-sub-header="" data-module="proses" data-submodule="umum" data-form="proses" data-folder="main"
+                                <a class="align-middle text-center" href="" alt="Detail Berkas" title="Detail Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                    data-action="lihat" data-header="Detail Berkas" data-sub-header="" data-module="proses" data-submodule="berkas" data-form="proses" data-folder="main"
+                                    data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
+                                    <i class="align-middle" data-feather="zoom-in"></i>
+                                </a>
+                                <a class="align-middle text-center" href="" alt="Ubah Berkas" title="Ubah Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                    data-action="ubah" data-header="Ubah Berkas Perkara" data-sub-header="" data-module="proses" data-submodule="berkas" data-form="proses" data-folder="main"
                                     data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
                                     <i class="align-middle" data-feather="edit-3"></i>
+                                </a>
+                                <a class="align-middle text-center" href="" alt="Hapus Berkas" title="Hapus Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                                    data-action="hapus" data-header="Hapus Berkas" data-sub-header="" data-module="proses" data-submodule="berkas" data-form="proses" data-folder="main"
+                                    data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
+                                    <i class="align-middle" data-feather="trash"></i>
                                 </a>
                             </td>
                         </tr>
@@ -62,6 +103,13 @@ if ($id != '') {
                     ?>
                     </tbody>
                 </table>
+                <div class="col-12 text-center">
+                    <button class="btn btn-primary" href="#" alt="Tambah Berkas Perkara" title="Tambah Berkas Perkara" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
+                        data-action="tambah" data-header="Tambah Berkas Perkara" data-sub-header="" data-module="proses" data-submodule="berkas" data-form="proses" data-folder="main"
+                        data-id="<?php echo $id;?>" data-userid="<?php echo $UserID;?>">
+                        Tambah Berkas
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -111,9 +159,11 @@ if ($id != '') {
                                 <td><?php echo $Nama;?></td>
                                 <td><?php echo $Catatan?></td>
                                 <td>
-                                    <a class="align-middle text-center" href="/index.php?page=proses&id=<?php echo $id;?>" alt="Proses Berkas" title="Proses Berkas">
-                                        <i class="align-middle" data-feather="edit-3"></i>
-                                    </a>
+                                    <form method="POST" action="">
+                                        <input type="hidden" class="form-control" id="ID" name="ID" value="<?php echo $id;?>">
+                                        <input type="hidden" class="form-control" id="PerkaraID" name="PerkaraID" value="<?php echo $PerkaraID;?>">
+                                        <button type="submit" class="btn btn-primary">Proses</button>
+                                    </form>
                                 </td>
                             </tr>
                             <?php

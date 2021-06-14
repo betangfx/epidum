@@ -24,7 +24,8 @@
 		}
 	}
 
-	class proses_berkas {
+	
+	class proses_berkas_data {
 		function berkas($ProsesID) {
 			$this->db = new database();
 			$conn = $this->db->koneksi;
@@ -41,13 +42,71 @@
 			return $hasil;
 		}
 	}
+	
+	class proses_berkas {
+		function berkas($ProsesBerkasID) {
+			$this->db = new database();
+			$conn = $this->db->koneksi;
+			$hasil = array();
+			$sql = "SELECT a.ProsesBerkasID, a.ProsesID, a.BerkasID, b.KodeBerkas, a.MulaiProses, a.AkhirProses, a.StatusID, a.Catatan FROM proses_berkas a
+					LEFT JOIN berkas b ON a.BerkasID = b.BerkasID
+					WHERE a.ProsesBerkasID='$ProsesBerkasID'";
+			$query = mysqli_query($conn, $sql);
+			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
+			{
+				$hasil[] = $result;
+				
+			}
+			return $hasil;
+		}
+	}
+
+	class berkas_aktif {
+		function berkas() {
+			$this->db = new database();
+			$conn = $this->db->koneksi;
+			$hasil = array();
+			$sql = "SELECT a.BerkasID, a.KodeBerkas FROM berkas a WHERE a.StatusID = '11'";
+			$query = mysqli_query($conn, $sql);
+			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
+			{
+				$hasil[] = $result;
+				
+			}
+			return $hasil;
+		}
+	}
 
 	class aksi_proses {
 
-		function ubah($id, $JaksaID, $Catatan, $UserID) {
+		function tambah($id, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID) {
 			$this->db 	= new database();
 			$conn 		= $this->db->koneksi;
-			$sql 		= "UPDATE proses SET JaksaID='$JaksaID', Catatan='$Catatan', UserBuat='$UserID', TglBuat=NOW() WHERE ProsesID ='$id' ";
+			$sql 		= "INSERT INTO proses_berkas (ProsesID, BerkasID, MulaiProses, AkhirProses, StatusID, Catatan, UserBuat, TglBuat) VALUES ('$id', '$BerkasID', '$MulaiProses', '$AkhirProses', '$StatusID', '$Catatan', '$UserID', NOW())";
+			$result		= mysqli_query($conn,$sql);
+			if ($result) {
+				echo 'sukses';
+			} else {
+				echo 'gagal tambah data';
+			}		
+		}
+
+		function ubah($id, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID) {
+			$this->db 	= new database();
+			$conn 		= $this->db->koneksi;
+			$sql 		= "UPDATE proses_berkas SET BerkasID='$BerkasID', MulaiProses='$MulaiProses', AkhirProses=' $AkhirProses', StatusID='$StatusID', Catatan='$Catatan', UserEdit='$UserID', TglEdit=NOW() WHERE ProsesBerkasID ='$id' ";
+			$result		= mysqli_query($conn,$sql);
+			if ($result) {
+				echo 'sukses';
+			} else {
+				echo 'gagal ubah data';
+			}		
+		}
+
+		function hapus($id) {
+			$this->db 	= new database();
+			$conn 		= $this->db->koneksi;
+			$sql 		= "DELETE FROM proses_berkas WHERE ProsesBerkasID ='$id' ";
 			$result		= mysqli_query($conn,$sql);
 			if ($result) {
 				echo 'sukses';

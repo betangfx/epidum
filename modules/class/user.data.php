@@ -7,11 +7,11 @@
 			if (!empty($UserID)) {
 				$sql = "SELECT a.*, b.UserLevel, b.UserLevelID, c.Status FROM user a
 						LEFT JOIN user_level b ON a.UserLevelID = b.UserLevelID
-						LEFT JOIN status c ON a.StatusID = c.StatusID WHERE UserID=$UserID";
+						LEFT JOIN master_status c ON a.StatusID = c.StatusID WHERE UserID=$UserID";
 			} else {
 				$sql = "SELECT a.*, b.UserLevel, b.UserLevelID, c.Status FROM user a
 				LEFT JOIN user_level b ON a.UserLevelID = b.UserLevelID
-				LEFT JOIN status c ON a.StatusID = c.StatusID";
+				LEFT JOIN master_status c ON a.StatusID = c.StatusID";
 			}
 			$query = mysqli_query($conn, $sql);
 			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
