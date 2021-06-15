@@ -2,13 +2,14 @@
 	error_reporting(E_ALL);
 	include ($_SERVER['DOCUMENT_ROOT'] . '/config.php');
 	$id			= isset($_POST['ID']) 		? $_POST['ID'] 		: NULL;
+    $ProsesID   = isset($_POST['pid']) 		? $_POST['pid'] 	: NULL;
+    $PerkaraID  = isset($_POST['perkara']) 		? $_POST['perkara'] : NULL;
 	$modul 		= isset($_POST['modul']) 	? $_POST['modul'] 	: NULL;
 	$submodul	= isset($_POST['submodul']) ? $_POST['submodul']: NULL;
 	$UserID		= isset($_POST['UserID']) 	? $_POST['UserID'] 	: NULL;
 	
 	// Mulai SET Variable
 	if ($modul == 'tambah_proses' && $submodul == 'berkas') {
-        $ProsesID       =	'';
         $BerkasID	    =	'';
         $KodeBerkas     =   ''; 
         $MulaiProses    =   '';
@@ -20,8 +21,6 @@
     if ($modul == 'ubah_proses' && $submodul == 'berkas' || $modul == 'hapus_proses' && $submodul == 'berkas') {
         $proses = new proses_berkas();
         foreach($proses->berkas($id) as $row){ 
-            $id		        =	$row['ProsesBerkasID'];
-            $ProsesID       =	$row['ProsesID'];
             $BerkasID	    =	$row['BerkasID'];
             $MulaiProses	=	$row['MulaiProses'];
             $AkhirProses    =	$row['AkhirProses'];
@@ -37,6 +36,12 @@
             <div class="col-sm-9">
                 <div class="input-group">
                     <input type="hidden" class="form-control" id="ID" name="ID" value="<?php echo $id;?>">
+                </div>
+                <div class="input-group">
+                    <input type="hidden" class="form-control" id="ProsesID" name="ProsesID" value="<?php echo $ProsesID;?>">
+                </div>
+                <div class="input-group">
+                    <input type="hidden" class="form-control" id="PerkaraID" name="PerkaraID" value="<?php echo $PerkaraID;?>">
                 </div>
                 <div class="input-group">
                     <input type="hidden" class="form-control" id="modul" name="modul" value="<?php echo $modul;?>">
@@ -108,11 +113,11 @@
             <label class="col-form-label col-sm-4 text-sm-left">Status</label>
             <div class="col-sm-8">
                 <label class="col-md-12 form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="StatusID" name="StatusID" value="11" <?php if ($StatusID == '11') { echo 'checked="checked"';}?>>
+                    <input class="form-check-input" type="radio" id="StatusID" name="StatusID" value="1" <?php if ($StatusID == '1') { echo 'checked="checked"';}?>>
                     <span class="form-check-label">Selesai</span>
                 </label>
                 <label class="col-md-12 form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="StatusID" name="StatusID" value="12" <?php if ($StatusID == '12') { echo 'checked="checked"';}?>>
+                    <input class="form-check-input" type="radio" id="StatusID" name="StatusID" value="2" <?php if ($StatusID == '2') { echo 'checked="checked"';}?>>
                     <span class="form-check-label">Belum Selesai</span>
                 </label>
             </div>
@@ -199,7 +204,9 @@ $(document).ready(function() {
                 success: function(hasil) {
                     if (hasil == 'sukses') {
                         var ID = $('#ID').val();
-                        location.href = "/index.php?page=proses&id="+ID
+                        var ProsesID = $('#ProsesID').val();
+                        var PerkaraID = $('#PerkaraID').val();
+                        location.href = "/index.php?page=proses&perkara="+PerkaraID+"&pid="+ProsesID
                     } else {
                         $('#modal-data').html(hasil);
                     }

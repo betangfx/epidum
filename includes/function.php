@@ -91,5 +91,40 @@
 			return $hasil;
 		}
 	}
-			
+	
+	class check_proses {
+		function hitung_perkara_baru($UserID) {
+			$this->db = new database();
+			$conn = $this->db->koneksi;
+			$hasil = array();
+			$sql = "SELECT a.PerkaraID, b.ProsesID FROM perkara a
+					LEFT JOIN proses b ON a.PerkaraID = b.PerkaraID
+					LEFT JOIN proses_berkas c on b.ProsesID = c.ProsesID
+					WHERE b.JaksaID = '$UserID' AND c.ProsesBerkasID IS NULL";
+			$query = mysqli_query($conn, $sql);
+			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
+			{
+				$hasil[] = $result;
+				
+			}
+			return $hasil;
+		}
+
+		function hitung_perkara_lama($UserID) {
+			$this->db = new database();
+			$conn = $this->db->koneksi;
+			$hasil = array();
+			$sql = "SELECT a.PerkaraID, b.ProsesID FROM perkara a
+					LEFT JOIN proses b ON a.PerkaraID = b.PerkaraID
+					LEFT JOIN proses_berkas c on b.ProsesID = c.ProsesID
+					WHERE b.JaksaID = '$UserID' AND c.ProsesBerkasID IS NOT NULL AND c.StatusID != '1'";
+			$query = mysqli_query($conn, $sql);
+			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
+			{
+				$hasil[] = $result;
+				
+			}
+			return $hasil;
+		}
+	}
 	?>

@@ -1,6 +1,8 @@
 <?php
 	include ($_SERVER['DOCUMENT_ROOT'] . '/config.php');
 	$id				= isset($_POST['ID']) 				? $_POST['ID'] 		: NULL;
+	$ProsesID   	= isset($_POST['ProsesID']) 		? $_POST['ProsesID'] 	: NULL;
+    $PerkaraID  	= isset($_POST['PerkaraID']) 		? $_POST['PerkaraID'] : NULL;
 	$modul 			= isset($_POST['modul']) 			? $_POST['modul'] 	: NULL;
 	$submodul		= isset($_POST['submodul']) 		? $_POST['submodul']: NULL;
 	$UserID			= isset($_POST['UserID']) 			? $_POST['UserID'] 	: NULL;
@@ -12,13 +14,13 @@
 
 	if ($modul == 'tambah_proses' && $submodul == 'berkas') {
 		$Aksi = new aksi_proses();
-		$result = $Aksi->tambah($id, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID);
+		$result = $Aksi->tambah($id, $ProsesID, $PerkaraID, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID);
 		echo $result;
 	}
 	
 	if ($modul == 'ubah_proses' && $submodul == 'berkas') {
 		$Aksi = new aksi_proses();
-		$result = $Aksi->ubah($id, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID);
+		$result = $Aksi->ubah($id, $ProsesID, $PerkaraID, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID);
 		echo $result;
 	}
 	

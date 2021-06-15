@@ -1,15 +1,22 @@
 <?php
 	class proses_data {
-		function proses($ProsesID) {
+		function proses($ProsesID, $UserID) {
 			$this->db = new database();
 			$conn = $this->db->koneksi;
 			$hasil = array();
-			if ($ProsesID != '') {
+			if ($ProsesID != '' && $UserID !='') {
 				$sql = "SELECT a.ProsesID, a.JaksaID, a.PerkaraID, b.NoSPDP, b.Tersangka, b.Pelanggaran, c.Nama, a.Catatan FROM proses a
 						LEFT JOIN perkara b ON a.PerkaraID = b.PerkaraID
 						LEFT JOIN user_profile c ON a.JaksaID = c.UserID
-						WHERE a.ProsesID=$ProsesID";
-			} else {
+						WHERE a.ProsesID='$ProsesID' AND a.JaksaID = '$UserID'";
+			} 
+			if ($ProsesID == '' && $UserID !=''){
+				$sql = "SELECT a.ProsesID, a.PerkaraID, b.NoSPDP, b.Tersangka, b.Pelanggaran, c.Nama, a.Catatan FROM proses a
+						LEFT JOIN perkara b ON a.PerkaraID = b.PerkaraID
+						LEFT JOIN user_profile c ON a.JaksaID = c.UserID
+						WHERE a.JaksaID = '$UserID'";
+			} 
+			if ($ProsesID == '' && $UserID ==''){
 				$sql = "SELECT a.ProsesID, a.PerkaraID, b.NoSPDP, b.Tersangka, b.Pelanggaran, c.Nama, a.Catatan FROM proses a
 						LEFT JOIN perkara b ON a.PerkaraID = b.PerkaraID
 						LEFT JOIN user_profile c ON a.JaksaID = c.UserID";
@@ -30,8 +37,9 @@
 			$this->db = new database();
 			$conn = $this->db->koneksi;
 			$hasil = array();
-			$sql = "SELECT a.ProsesBerkasID, a.BerkasID, b.KodeBerkas, a.MulaiProses, a.AkhirProses, a.StatusID FROM proses_berkas a
+			$sql = "SELECT a.ProsesBerkasID, a.BerkasID, b.KodeBerkas, a.MulaiProses, a.AkhirProses, a.StatusID, c.Status FROM proses_berkas a
 					LEFT JOIN berkas b ON a.BerkasID = b.BerkasID
+					LEFT JOIN master_status c ON a.StatusID = c.StatusID
 					WHERE a.ProsesID='$ProsesID'";
 			$query = mysqli_query($conn, $sql);
 			while($result = mysqli_fetch_array($query,MYSQLI_ASSOC))
@@ -79,10 +87,10 @@
 
 	class aksi_proses {
 
-		function tambah($id, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID) {
+		function tambah($id, $ProsesID, $PerkaraID, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID) {
 			$this->db 	= new database();
 			$conn 		= $this->db->koneksi;
-			$sql 		= "INSERT INTO proses_berkas (ProsesID, BerkasID, MulaiProses, AkhirProses, StatusID, Catatan, UserBuat, TglBuat) VALUES ('$id', '$BerkasID', '$MulaiProses', '$AkhirProses', '$StatusID', '$Catatan', '$UserID', NOW())";
+			$sql 		= "INSERT INTO proses_berkas (ProsesID, BerkasID, MulaiProses, AkhirProses, StatusID, Catatan, UserBuat, TglBuat) VALUES ('$ProsesID', '$BerkasID', '$MulaiProses', '$AkhirProses', '$StatusID', '$Catatan', '$UserID', NOW())";
 			$result		= mysqli_query($conn,$sql);
 			if ($result) {
 				echo 'sukses';
@@ -91,7 +99,7 @@
 			}		
 		}
 
-		function ubah($id, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID) {
+		function ubah($id, $ProsesID, $PerkaraID, $BerkasID, $MulaiProses, $AkhirProses, $StatusID, $Catatan, $UserID) {
 			$this->db 	= new database();
 			$conn 		= $this->db->koneksi;
 			$sql 		= "UPDATE proses_berkas SET BerkasID='$BerkasID', MulaiProses='$MulaiProses', AkhirProses=' $AkhirProses', StatusID='$StatusID', Catatan='$Catatan', UserEdit='$UserID', TglEdit=NOW() WHERE ProsesBerkasID ='$id' ";

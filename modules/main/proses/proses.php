@@ -1,13 +1,18 @@
 <h1 class="h3 mb-3"><?php echo $ModuleNM;?></h1>
 <?php
-$listenpostid				= isset($_POST['ID']) 				? $_POST['ID'] 		: NULL;
-$listengetid				= isset($_GET['id']) 				? $_GET['id'] 		: NULL;
-if ($listengetid == '') {
-    $id = $listenpostid;
-} else {
-    $id = $listengetid;
-}
-if ($id != '') {
+$pid			= isset($_GET['pid']) 				? $_GET['pid'] 		: NULL;
+$PerkaraID		= isset($_GET['perkara']) 			? $_GET['perkara'] : NULL;
+
+if ($pid != '') {
+    $perkara = new perkara_data();
+    foreach($perkara->perkara($PerkaraID) as $row){ 
+        $PerkaraID	    =	$row['PerkaraID'];
+        $NoSPDP		    =	$row['NoSPDP'];
+        $Tersangka	    =	$row['Tersangka'];
+        $Pelanggaran    =	$row['Pelanggaran'];
+        $TglTerima	    =	$row['TglTerima'];
+        $Catatan        =	$row['Catatan'];
+    }
 ?>
 <div class="row">
     <div class="col-12">
@@ -20,27 +25,21 @@ if ($id != '') {
                 <div class="row mb-2">
                     <div class="col-md-6">
                         <div class="font-weight-bold">No. Register:</div>
-                        <strong>P12345678</strong>
+                        <strong><?php echo $PerkaraID;?></strong>
                     </div>
                     <div class="col-md-6 text-md-right">
                         <div class="font-weight-bold">No. SPDP:</div>
-                        <strong>October 2, 2018 - 03:45 pm</strong>
+                        <strong><?php echo $NoSPDP;?></strong>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-6">
                         <div class="font-weight-bold">Tersangka</div>
-                        <strong>Chris Wood</strong>
+                        <strong><?php echo $Tersangka;?></strong>
                     </div>
                     <div class="col-md-6 text-md-right">
                         <div class="font-weight-bold">Pelanggaran</div>
-                        <strong>AppStack LLC</strong>
-                    </div>
-                </div>
-                <div class="row mb-0">
-                    <div class="col-md-12 text-center">
-                        <div class="font-weight-bold">Jaksa</div>
-                        <strong>Chris Wood</strong>
+                        <strong><?php echo $Pelanggaran;?></strong>
                     </div>
                 </div>
             </div>
@@ -67,33 +66,38 @@ if ($id != '') {
                         <?php
                         $no = 1;
                         $proses = new proses_berkas_data();
-                        foreach($proses->berkas($id) as $row){ 
-                            $id		        =	$row['ProsesBerkasID'];
+                        foreach($proses->berkas($pid) as $row){ 
+                            $id             =	$row['ProsesBerkasID'];
                             $KodeBerkas	    =	$row['KodeBerkas'];
                             $MulaiProses	=	$row['MulaiProses'];
                             $AkhirProses    =	$row['AkhirProses'];
                             $StatusID       =	$row['StatusID'];
+                            $Status         =	$row['Status'];
                     ?>
                         <tr>
                             <td><?php echo $no++;?></td>
                             <td><?php echo $KodeBerkas;?></td>
                             <td><?php echo $MulaiProses;?></td>
                             <td><?php echo $AkhirProses;?></td>
-                            <td><?php echo $StatusID;?></td>
                             <td>
-                                <a class="align-middle text-center" href="" alt="Detail Berkas" title="Detail Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
-                                    data-action="lihat" data-header="Detail Berkas" data-sub-header="" data-module="proses" data-submodule="berkas" data-form="proses" data-folder="main"
-                                    data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
-                                    <i class="align-middle" data-feather="zoom-in"></i>
-                                </a>
+                            <?php 
+                                if ($StatusID == '1') {
+                                echo '<span class="badge badge-success">'.$Status.'</span>';
+                                }
+                                else if ($StatusID == '2') {
+                                echo '<span class="badge badge-warning">'.$Status.'</span>';
+                                }
+                            ?>
+                            </td>
+                            <td>
                                 <a class="align-middle text-center" href="" alt="Ubah Berkas" title="Ubah Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
                                     data-action="ubah" data-header="Ubah Berkas Perkara" data-sub-header="" data-module="proses" data-submodule="berkas" data-form="proses" data-folder="main"
-                                    data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
+                                    data-perkara="<?php echo $PerkaraID;?>" data-pid="<?php echo $pid;?>" data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
                                     <i class="align-middle" data-feather="edit-3"></i>
                                 </a>
                                 <a class="align-middle text-center" href="" alt="Hapus Berkas" title="Hapus Berkas" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
                                     data-action="hapus" data-header="Hapus Berkas" data-sub-header="" data-module="proses" data-submodule="berkas" data-form="proses" data-folder="main"
-                                    data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
+                                    data-perkara="<?php echo $PerkaraID;?>" data-pid="<?php echo $pid;?>" data-id="<?php echo $id;?>" data-UserID="<?php echo $UserID;?>">
                                     <i class="align-middle" data-feather="trash"></i>
                                 </a>
                             </td>
@@ -106,7 +110,7 @@ if ($id != '') {
                 <div class="col-12 text-center">
                     <button class="btn btn-primary" href="#" alt="Tambah Berkas Perkara" title="Tambah Berkas Perkara" data-target="#newModal" data-toggle="modal" data-backdrop="static" data-size="sm"
                         data-action="tambah" data-header="Tambah Berkas Perkara" data-sub-header="" data-module="proses" data-submodule="berkas" data-form="proses" data-folder="main"
-                        data-id="<?php echo $id;?>" data-userid="<?php echo $UserID;?>">
+                        data-perkara="<?php echo $PerkaraID;?>" data-pid="<?php echo $pid;?>" data-id="" data-userid="<?php echo $UserID;?>">
                         Tambah Berkas
                     </button>
                 </div>
@@ -142,8 +146,13 @@ if ($id != '') {
                         <tbody>
                             <?php
                                 $no = 1;
+                                if ($UserLevelID == '0' || $UserLevelID == '1') {
+                                    $AksesID = '';
+                                } else {
+                                    $AksesID = $UserID;
+                                }
                                 $proses = new proses_data();
-                                foreach($proses->proses('') as $row){ 
+                                foreach($proses->proses('', $AksesID) as $row){ 
                                     $id		        =	$row['ProsesID'];
                                     $PerkaraID	    =	$row['PerkaraID'];
                                     $Tersangka	    =	$row['Tersangka'];
@@ -159,11 +168,7 @@ if ($id != '') {
                                 <td><?php echo $Nama;?></td>
                                 <td><?php echo $Catatan?></td>
                                 <td>
-                                    <form method="POST" action="">
-                                        <input type="hidden" class="form-control" id="ID" name="ID" value="<?php echo $id;?>">
-                                        <input type="hidden" class="form-control" id="PerkaraID" name="PerkaraID" value="<?php echo $PerkaraID;?>">
-                                        <button type="submit" class="btn btn-primary">Proses</button>
-                                    </form>
+                                <a href="/index.php?page=proses&perkara=<?php echo $PerkaraID;?>&pid=<?php echo $id;?>">Proses</a>
                                 </td>
                             </tr>
                             <?php

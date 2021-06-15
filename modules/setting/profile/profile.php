@@ -104,7 +104,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputFirstName">Jabatan</label>
-                                <select class="form-control" id="Pangkat" name="Pangkat" required>
+                                <select class="form-control" id="Jabatan" name="Jabatan" required>
                                     <option value=""></option>
                                     <?php
                                         $jabatan = new jabatan_data();

@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="e-Pidum">
     <meta name="author" content="BetangIT">
-    <link rel="icon" href="<?php echo $site_url;?>/assets/img/Icon.png" type="image/icon type">
+    <link rel="icon" href="<?php echo $site_url;?>/assets/img/icon.png" type="image/icon type">
     <title><?php echo $appname . ' '. $vendors;?></title>
 
     
@@ -49,7 +49,7 @@
                             <div class="card-body">
                                 <div class="m-sm-4">
                                     <div class="text-center">
-                                        <img src="<?php echo $site_url;?>/images/avatars/user-login.jpg" alt=""
+                                        <img src="<?php echo $site_url;?>/images/avatars/user-login.png" alt=""
                                             class="img-fluid rounded-circle" width="132" height="132">
                                     </div>
                                     <form id="login" name="login" method="POST" action="">
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-12 col-md-6 col-xl d-flex">
                             <div class="card flex-fill">
                                 <div class="card-body py-4">
@@ -247,7 +247,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <?php
 					}
 					?>

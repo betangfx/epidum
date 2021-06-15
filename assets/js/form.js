@@ -54,6 +54,8 @@ $(document).ready(function() {
         var sub = $(e.relatedTarget).data('submodule');
         var folder = $(e.relatedTarget).data('folder');
         var page = $(e.relatedTarget).data('form');
+        var perkara = $(e.relatedTarget).data('perkara');
+        var pid = $(e.relatedTarget).data('pid');
         var id = $(e.relatedTarget).data('id');
         var UserID = $(e.relatedTarget).data('userid');
         var UserLevel = $(e.relatedTarget).data('userlevel');
@@ -65,7 +67,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../modules/' + folder + '/' + module + '/' + page + '.form.php',
-                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID, 'UserLevel': UserLevel },
+                data: { 'ID': id, 'pid': pid, 'perkara': perkara, 'modul': modul, 'submodul': sub, 'UserID': UserID, 'UserLevel': UserLevel },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#newModal .modal-body-data').html(divs[0]);
@@ -81,7 +83,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../modules/' + folder + '/' + module + '/' + page + '.form.php',
-                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID, 'UserLevel': UserLevel },
+                data: { 'ID': id, 'pid': pid, 'perkara': perkara, 'modul': modul, 'submodul': sub, 'UserID': UserID, 'UserLevel': UserLevel },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#newModal .modal-body-data').html(divs[0]);
@@ -97,7 +99,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '../modules/' + folder + '/' + module + '/' + page + '.form.php',
-                data: { 'ID': id, 'modul': modul, 'submodul': sub, 'UserID': UserID, 'UserLevel': UserLevel },
+                data: { 'ID': id, 'pid': pid, 'perkara': perkara, 'modul': modul, 'submodul': sub, 'UserID': UserID, 'UserLevel': UserLevel },
                 success: function(data) {
                     var divs = data.split('---');
                     $('#newModal .modal-body-data').html(divs[0]);

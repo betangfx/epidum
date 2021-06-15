@@ -28,7 +28,7 @@
 	?>
 </ul>
 
-<div class="sidebar-bottom d-none d-lg-block">
+<!-- <div class="sidebar-bottom d-none d-lg-block">
     <div class="media">
         <img class="rounded-circle mr-3" src="<?php echo $site_url;?>/images/avatars/user-login.jpg" alt="Chris Wood"
 		width="40" height="40">
@@ -39,4 +39,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
